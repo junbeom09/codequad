@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        *{
+            vertical-align: baseline;
+            padding: 0;
+            border-radius: 0;
+        }
+        .header {
+            position: relative;
+            display: block;
+            margin: 0;
+        }
+        .header .hd-top {
+            border-bottom: 1px solid #f0f0f0;
+            background: #fff;
+            position: relative;
+        }
+        .header .hd-top .inner {
+            overflow: visible;
+            padding: 30px 0 55px 170px;
+            position: relative;
+            max-width: 1170px;
+            margin: auto;
+        }
+        .header .hd-top h1 {
+            position: absolute;
+            top: 32px;
+            left: 10px;
+            margin: 0;
+            padding: 0;
+            font-size: 100%;
+            transform: translateY(-50%);
+        }
+        body img {
+            max-height: 100px;
+            height: auto;
+            vertical-align: middle;
+            display: flex;
+            align-items: center;
+            padding: 30px;
+        }
+        .srch-group {
+            padding-right: 50px;
+            margin-left: 100px;
+        }
+        .srch-group input {
+            position: relative;
+            z-index: 1;
+            width: 70%;
+            height: 50px;
+            border-radius: 5px 0 0 5px;
+            font-size: 15px;
+            padding: 0 20px;
+            border-color: #7fb5e3;
+        }
+
+        input[type=text] {
+            line-height: normal;
+            border: solid 1px #e0e3e5;
+            color: #000;
+            background-color: #fff;
+        }
+        .btn-search {
+            top: 0;
+            right: 0;
+            width: 52px;
+            height: 52px;
+            border: solid 1px #7fb5e3;
+            border-left: 0;
+            border-radius: 0 5px 5px 0;
+            background: #0089ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-search i {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <header id="header" class="header">
+        <div class="hd-top">
+            <div class="inner">
+                <div>
+                    <h1>
+                        <a href="/header.html">
+                            <img src="img/newjins_row_logo.png">
+                        </a>
+                    </h1>
+                </div>
+                <div>
+                    <div class="srch-group input-group" style="display: flex;">
+                        <input id="total-search-key" type="text" class="search-key" placeholder="검색어를 입력해주세요" autocomplete="off">
+                        <div>
+                            <button type="button" class="btn-search">
+                                <i class="fa-solid fa-magnifying-glass"></i> 
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="container forms">
+        <div class="form login">
+            <div class="form-content">
+                <form action="#">
+                    <div class="field input-field">
+                        <input type="아이디" placeholder="아이디" class="input">
+                    </div>
+                    <div class="field input-field">
+                        <input type="비밀번호" placeholder="비밀번호" class="비밀번호">
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+                    <div class="form-link">
+                        <a href="#" class="forgot-pass">비밀번호를 잊으셨나요?</a>
+                    </div>
+                    <div class="field button-field">
+                        <button>로그인</button>
+                    </div>
+                </form>
+            </div>
+            <div class="line"></div>
+            <div class="media-options">
+                <a href="#" class="field kakao" aria-label="Login with Kakao account">
+                    <i class="fa-solid fa-comment kakao-icon"></i>
+                    <span>카카오 계정으로 로그인</span>
+                </a>
+            </div>
+            <div class="media-options">
+                <a href="#" class="field google" aria-label="Login with Google account">
+                    <img src="img/google-icon.png" class="google-icon">
+                    <span>구글 계정으로 로그인</span>
+                </a>
+            </div>            
+        </div>
+        <div class="form signup">
+            <div class="form-content">
+                <header>Signup</header>
+                <form action="#">
+                </form>
+            </div>
+            <div class="line"></div>
+            <div class="media-options">
+                <a href="#" class="field kakao">
+                    <i class="fa-solid fa-comment"></i>
+                    <span>카카오 계정으로 로그인</span>
+                </a>
+            </div>
+            <div class="media-options">
+                <a href="#" class="field google">
+                    <i class="fa-brands fa-google"></i>
+                    <span>구글 계정으로 로그인</span>
+                </a>
+            </div>            
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
