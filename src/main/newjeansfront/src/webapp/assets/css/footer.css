@@ -1,0 +1,85 @@
+.ft-cont .ft-link {
+    margin-top: 18px;
+}
+.ft-cont .ft-link li {
+    float: left;
+}
+.ft-cont .ft-link a {
+    color: #222;
+    font-size: 14px;
+    font-weight: 700;
+}
+.ft-cont .ft-link li + li {
+    position: relative;
+    margin-left: 6px;
+    padding-left: 10px;
+}
+.ft-cont .ft-link li + li:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    margin-top: -2px;
+    border-radius: 50%;
+    background: #d3d3d3;
+}
+.ft-cont .ft-link .privacy {
+    color: #006cff !important;
+}
+
+.ft-cont .ft-link a {
+    color: #222;
+    font-size: 14px;
+    font-weight: 700;
+}
+.ft-cont .ft-link:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+* {
+    list-style: none;
+    vertical-align: baseline;
+}
+a {
+    text-decoration: none;
+}
+.ft-cont .ft-info {
+    margin-top: 15px;
+}
+.ft-cont .ft-info li {
+    float: left;
+    margin-right: 18px;
+    color: #666;
+    font-size: 13px;
+}
+.ft-cont .ft-info:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.ft-cont .ft-copy {
+    margin-top: 12px;
+    color: #666;
+    font-size: 11px;
+}
+.doc-footer {
+    overflow: hidden;
+    padding: 33px 0 43px;
+    font-size: 12px;
+    line-height: 20px;
+    color: gray;
+    letter-spacing: 0;
+    clear: both;
+}
+.doc-footer {
+    min-width: 1132px;
+}
+.doc-footer .inner_foot {
+    position: relative;
+    width: 1100px;
+    margin: 0 auto;
+}

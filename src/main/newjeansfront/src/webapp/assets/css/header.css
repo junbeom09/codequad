@@ -1,3 +1,149 @@
+*{
+    vertical-align: baseline;
+    padding: 0;
+    border-radius: 0;
+}
 .header {
     position: relative;
+    display: block;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.header .hd-top {
+    border-bottom: 1px solid #f0f0f0;
+    background: #fff;
+    position: relative;
+}
+.header .hd-top .inner {
+    overflow: visible;
+    padding: 30px 0 55px 170px;
+    position: relative;
+    max-width: 1170px;
+    margin: auto;
+}
+.header .hd-top h1 {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    transform: translateY(-50%);
+}
+h1 > a > img {
+    max-height: 100px;
+    height: auto;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    margin-top: 20px;
+}
+.srch-group {
+    padding-right: 50px;
+    margin-left: 170px;
+    margin-top: 10px;
+}
+.srch-group input {
+    position: relative;
+    z-index: 1;
+    width: 70%;
+    height: 50px;
+    border-radius: 5px 0 0 5px;
+    font-size: 15px;
+    padding: 0 20px;
+    border-color: #7fb5e3;
+}
+
+input[type=text] {
+    line-height: normal;
+    border: solid 1px #e0e3e5;
+    color: #000;
+    background-color: #fff;
+}
+.btn-search {
+    top: 0;
+    right: 0;
+    width: 52px;
+    height: 52px;
+    border: solid 1px #7fb5e3;
+    border-left: 0;
+    border-radius: 0 5px 5px 0;
+    background: #0089ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.btn-search i {
+    color: #ffffff;
+}
+.login-area {
+    position: absolute;
+    top: 40px;
+    right: 1px;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, .11);
+    transition: all 0.3s;
+    z-index: 300;
+    flex: 1; /* 버튼들의 너비를 균등하게 */
+    margin: 0 10px; /* 버튼 간의 간격 */
+}
+.btn-login {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s;
+    cursor: pointer;
+    padding: 10px 0; /* 버튼의 내부 여백 */
+    background-color: rgb(52, 152, 219);
+    border-radius: 10px;
+    border: solid 1px #e0e3e5;
+}
+.login-area2 {
+    position: absolute;
+    top: 40px;
+    right: -120px;
+    width: 100px;
+    height: 50px;
+    border: solid 1px #e0e3e5;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, .11);
+    transition: all 0.3s;
+    z-index: 300;
+    flex: 1; /* 버튼들의 너비를 균등하게 */
+    margin: 0 10px; /* 버튼 간의 간격 */
+}
+.hd-gnb {
+    height: 50px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fff;
+    z-index: 199;
+    position: relative;
+    padding: 0 50px;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.inner-menu {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 300px;
+}
+
+.full-screan {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
