@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.njs.repository.ArcRepository">
+    <select id="Arclist" resultType="kr.njs.entity.Articles">
+        SELECT
+            arti_title AS at_title,
+            arti_content AS at_content,
+            arti_pic AS at_url,
+            arti_created AS at_created,
+            arti_cate AS at_cate
+        FROM Articles
+    </select>
+</mapper>

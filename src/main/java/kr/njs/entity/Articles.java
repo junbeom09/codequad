@@ -12,5 +12,5 @@ public class Articles {
     private String at_content; //  기사 내용
     private String at_url; // 기사 경로
     private String at_created; // 기사 작성일
-    private String at_company; // 언론사 이름
+    private int at_cate; // 카테고리
 }
