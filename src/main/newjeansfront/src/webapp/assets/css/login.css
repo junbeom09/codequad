@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --primary-color: #0089ff;
+    --secondary-color: #0056b3;
+    --border-color: #cacaca;
+}
+
+.container {
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.form {
+    width: 80%;
+    max-width: 475px;
+    padding: 40px;
+    border-radius: 10px;
+    background: #FFF;
+    border: 1px solid var(--border-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-content {
+    margin-top: 30px;
+}
+
+.field {
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.field input,
+.field button {
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 6px;
+}
+
+.field input {
+    outline: none;
+    padding: 0 15px;
+    border: 1px solid var(--border-color);
+}
+
+.field.input-field {
+    display: flex;
+    align-items: center;
+}
+
+.field.input-field i {
+    position: absolute;
+    left: 15px;
+    color: #999;
+    font-size: 16px;
+}
+
+.field.input-field input {
+    padding-left: 40px; /* Adjust as per icon size */
+}
+
+.field button {
+    color: #fff;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.field button:hover {
+    background-color: var(--secondary-color);
+}
+
+.form-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-link span,
+.form-link a {
+    font-size: 14px;
+    font-weight: 400;
+    color: #232836;
+}
+
+.form a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.form-content a:hover {
+    text-decoration: underline;
+}
+
+.line {
+    height: 1px;
+    width: 100%;
+    margin: 36px 0;
+    background-color: #d4d4d4;
+    position: relative;
+}
+
+.line::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFF;
+    padding: 0 15px;
+}
+
+.media-options a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+a.kakao {
+    color: #3c1e1e;
+    background-color: #fee500;
+    border: 1px solid #fee500;
+}
+
+a.kakao .kakao-icon {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+a.google {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    margin-right: 5px;
+}
+
+a.google:hover {
+    background-color: #f0f0f0;
+}
+
+a.google span {
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+.media-options .field {
+    margin-top: 20px;
+}
+
+.field span {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .srch-group input {
+        width: 60%;
+        margin-left: 20px;
+    }
+    .srch-group button {
+        width: 40px;
+        height: 40px;
+    }
+    .btn-login,
+    .btn-signup {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .header {
+        position: relative;
+        display: block;
+        margin: 0;
+    }
+    .header .hd-top {
+        border-bottom: 1px solid #f0f0f0;
+        background: #fff;
+        position: relative;
+    }
+    .header .hd-top .inner {
+        max-width: 1170px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 15px;
+    }
+    .header .hd-top h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 100%;
+    }
+    .background-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-image: url('../img/newjin_logo.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    body img {
+        max-height: 75px;
+        height: auto;
+        display: flex;
+        align-items: center;
+    }
+    img.google-icon {
+        margin-right: 15px;
+    }
+    .srch-group {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        margin-right: 20px;
+    }
+    .srch-group input {
+        width: 75%;
+        height: 50px;
+        border-radius: 5px 0 0 5px;
+        font-size: 15px;
+        padding: 0 20px;
+        margin-left: 125px;
+        border: solid 1px #e0e3e5;
+        color: #000;
+        background-color: #fff;
+    }
+    .btn-search {
+        width: 52px;
+        height: 52px;
+        border: solid 1px #7fb5e3;
+        border-left: 0;
+        border-radius: 0 5px 5px 0;
+        background: #0089ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .btn-search i {
+        color: #ffffff;
+    }
+    .login-signup-buttons {
+        display: flex;
+        align-items: center;
+    }
+    .btn-login,
+    .btn-signup {
+        background-color: #0089ff;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-left: 25px;
+    }
+    .btn-login:hover,
+    .btn-signup:hover {
+        background-color: #0056b3;
+    }
+    /* Animation */
+    @keyframes scale-up {
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    .forms {
+        animation: scale-up 0.3s ease-out;
+    }
+}

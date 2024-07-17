@@ -9,6 +9,8 @@ import Category from "./Components/Category";
 import Recommend from "./Components/Recommend";
 import Subscribe from "./Components/Subscribe";
 import axios from "axios";
+import newjins_row_logo from './assets/img/newjins_row_logo.jpg';
+import Login from "./Components/Login.jsx";
 
 const Mainpage = () => {
     const getCate = async (e) => {
@@ -32,9 +34,9 @@ const Mainpage = () => {
                         <div className="inner">
                             <div>
                                 <h1>
-                                    <a href="./mainpage.jsx">
-                                        <img src="/assets/img/newjins_row_logo.png" alt="뉴진스로고"/>
-                                    </a>
+                                    <Link to="/">
+                                        <img src={newjins_row_logo}/>
+                                    </Link>
                                 </h1>
                             </div>
                             <div>
@@ -52,7 +54,7 @@ const Mainpage = () => {
                             <div style={{display: "flex", justifyContent: "space-between"}}>
                                 <div className="login-area">
                                     <button type="button" className="btn-login">
-                                        <a href="">로그인</a>
+                                        <Link to="/login">로그인</Link>
                                     </button>
                                 </div>
                                 <div className="login-area2">
@@ -150,6 +152,7 @@ const Mainpage = () => {
                     <Route path='/category' element={<Category/>}/>
                     <Route path='/recommend' element={<Recommend/>}/>
                     <Route path='/Subscribe' element={<Subscribe/>}/>
+                    <Route path='login' element={<Login/>}/>
                 </Routes>
 
                 {/*// <!-- footer -->*/}
