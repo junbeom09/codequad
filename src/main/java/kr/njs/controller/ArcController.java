@@ -13,13 +13,13 @@ import java.util.List;
 @RequestMapping("/api")
 @RestController
 @RequiredArgsConstructor
-
+@CrossOrigin(origins = "http://localhost:3000")
 public class ArcController {
 
     @Autowired
     private final ArcService arcservice;
 
-    @GetMapping("/newsArticles")
+    @GetMapping("/newsArticles") // 뉴스 리스트 가져오는 기능
     public ResponseEntity<List<Articles>> Arclist() {
         try {
             List<Articles> articles = arcservice.Arclist();

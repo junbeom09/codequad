@@ -10,4 +10,7 @@ public interface UserRepository {
 
     void Joinuser(User user);
 
+    void userUpdate(User user);
 }
+
+

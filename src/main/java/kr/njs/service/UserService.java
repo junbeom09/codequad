@@ -1,6 +1,7 @@
 package kr.njs.service;
 
 
+import jakarta.transaction.Transactional;
 import kr.njs.entity.User;
 import kr.njs.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,5 +16,9 @@ public class UserService {
 
         userRepository.Joinuser(user);
         System.out.println("User saved: " + user);
+    }
+    @Transactional
+    public void userUpdate(User user){
+        userRepository.userUpdate(user);
     }
 }

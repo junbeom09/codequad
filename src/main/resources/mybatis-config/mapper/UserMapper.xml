@@ -4,8 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.njs.repository.UserRepository">
+
     <insert id="Joinuser" parameterType="kr.njs.entity.User">
         INSERT INTO Users (user_name, user_email, user_password, user_birthdate, user_id, user_joined)
         VALUES (#{us_name}, #{us_email}, #{us_password}, #{us_birthdate}, #{us_id}, now())
     </insert>
+
+    <update id="userUpdate">
+        UPDATE Users
+        SET user_name = #{us_name}, user_email = #{us_email}, user_password = #{us_password}, user_birthdate = #{us_birthdate}
+        WHERE user_id = #{us_id}
+    </update>
+
 </mapper>

@@ -14,7 +14,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/userAdd")
+    @PostMapping("/userAdd")// 회원가입
     public ResponseEntity<?> userAdd(@RequestBody User user) {
         try {
             userService.saveUser(user);
@@ -24,7 +24,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/endpoint")
+    @PostMapping("/endpoint") //리액트로 정보 넘기는 기능
     public ResponseEntity<String> receiveData(@RequestBody String data) {
         try {
             if(data.equals("경제")){
@@ -34,5 +34,12 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("데이터 처리 실패: " + e.getMessage());
         }
+    }
+
+    @PutMapping("/userUpdate/{us_id}") //회원정보 수정 기능
+    public String userUpdate(@PathVariable String us_id, @RequestBody User user){
+        user.setUs_id(us_id);
+        userService.userUpdate(user);
+        return "put 요청 : " + " id : " + user.getUs_id() +  "사용자비밀번호 : " + user.getUs_password();
     }
 }
