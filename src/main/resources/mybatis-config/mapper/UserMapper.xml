@@ -16,4 +16,16 @@
         WHERE user_id = #{us_id}
     </update>
 
+    <select id="findByIdAndPassword" parameterType="map" resultType="kr.njs.entity.User">
+        SELECT
+            user_id as us_id,
+            user_password as us_password,
+            user_name as us_name,
+            user_email as us_email,
+            user_birthdate as us_birthdate,
+            user_joined as create_At
+        FROM Users
+        WHERE user_id = #{us_id} AND user_password = #{us_password}
+    </select>
+
 </mapper>

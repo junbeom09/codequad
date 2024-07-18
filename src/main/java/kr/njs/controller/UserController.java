@@ -43,4 +43,15 @@ public class UserController {
         return "put 요청 : " + " id : " + user.getUs_id() +  "사용자비밀번호 : " + user.getUs_password();
     }
     //테스트
+
+    @PostMapping("/userLogin")
+    public String userLogin(@RequestBody User user) {
+        User loginUser = userService.login(user.getUs_id(), user.getUs_password());
+        if (loginUser != null) {
+            return "로그인 성공! " + loginUser.getUs_id();
+        } else {
+            return "로그인 실패 : 잘못된 비밀번호 또는 아이디";
+        }
+    }
+
 }
