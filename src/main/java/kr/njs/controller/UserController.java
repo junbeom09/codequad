@@ -42,4 +42,5 @@ public class UserController {
         userService.userUpdate(user);
         return "put 요청 : " + " id : " + user.getUs_id() +  "사용자비밀번호 : " + user.getUs_password();
     }
+    //테스트
 }
