@@ -13,6 +13,7 @@ import newjins_row_logo from './assets/img/newjins_row_logo.jpg';
 import Login from "./Components/Login.jsx";
 import SignUp from "./Components/SignUp.jsx";
 import SignUp2 from "./Components/SignUp2";
+import MyPage from "./Components/MyPage";
 const Mainpage = () => {
     const getCate = async (e) => {
         try {
@@ -139,8 +140,8 @@ const Mainpage = () => {
                                     <span className="txt_gnb">JTBC</span></a></li>
                                 <li><a href="" className="link_gnb">
                                     <span className="txt_gnb">YTN</span></a></li>
-                                <li><a href="" className="link_gnb">
-                                    <span className="txt_gnb">조선일보</span></a></li>
+                                <li><Link to="/myPage" className="link_gnb">
+                                    <span className="txt_gnb">조선일보</span></Link></li>
                             </ul>
                         </div>
                     </nav>
@@ -156,6 +157,7 @@ const Mainpage = () => {
                     <Route path='/login' element={<Login/>}/>
                     <Route path='/signUp' element={<SignUp/>}/>
                     <Route path='/signUp2' element={<SignUp2/>}/>
+                    <Route path='/myPage' element={<MyPage/>}/>
                 </Routes>
 
                 {/*// <!-- footer -->*/}
