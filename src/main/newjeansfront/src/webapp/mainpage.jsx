@@ -11,7 +11,8 @@ import Subscribe from "./Components/Subscribe";
 import axios from "axios";
 import newjins_row_logo from './assets/img/newjins_row_logo.jpg';
 import Login from "./Components/Login.jsx";
-
+import SignUp from "./Components/SignUp.jsx";
+import SignUp2 from "./Components/SignUp2";
 const Mainpage = () => {
     const getCate = async (e) => {
         try {
@@ -59,7 +60,7 @@ const Mainpage = () => {
                                 </div>
                                 <div className="login-area2">
                                     <button type="button" className="btn-login">
-                                        <a href="">회원가입</a>
+                                        <Link to="/signUp">회원가입</Link>
                                     </button>
                                 </div>
                             </div>
@@ -152,7 +153,9 @@ const Mainpage = () => {
                     <Route path='/category' element={<Category/>}/>
                     <Route path='/recommend' element={<Recommend/>}/>
                     <Route path='/Subscribe' element={<Subscribe/>}/>
-                    <Route path='login' element={<Login/>}/>
+                    <Route path='/login' element={<Login/>}/>
+                    <Route path='/signUp' element={<SignUp/>}/>
+                    <Route path='/signUp2' element={<SignUp2/>}/>
                 </Routes>
 
                 {/*// <!-- footer -->*/}

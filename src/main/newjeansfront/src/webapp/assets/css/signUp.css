@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+
+.signup-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0; /* 선택적: 배경색 추가 */
+}
+
+.form-container {
+    margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 선택적: 그림자 효과 */
+    padding: 35px;
+    background: #fff;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    /*background-image: url('../img/background.png');*/
+    background-size: cover;
+    background-position: center;
+
+}
+
+.form-step h2 {
+    font-size: 27px;
+    margin: 0px 0 10px;
+    display: inline-block;
+}
+
+.form-step {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    white-space: nowrap;
+}
+
+form .form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+form label {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 7px;
+}
+
+form input,
+form select {
+    height: 45px;
+    padding: 10px;
+    width: 100%;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #bfbfbf;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #9a9a9a;
+}
+
+form input.error,
+form select.error {
+    border-color: #f91919;
+    background: #f9f0f1;
+}
+
+form small {
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+    color: #f91919;
+}
+
+form .password i {
+    position: absolute;
+    right: 10px;
+    height: 45px;
+    top: 28px;
+    font-size: 20px;
+    line-height: 45px;
+    width: 45px;
+    cursor: pointer;
+    color: #939393;
+    text-align: center;
+}
+
+.submit-btn {
+    margin-top: 30px;
+}
+
+.submit-btn input {
+    color: white;
+    border: none;
+    height: auto;
+    font-size: 16px;
+    padding: 13px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    background: #106EEA;
+    transition: 0.2s ease;
+}
+
+.submit-btn input:hover {
+    background: #106EEA;
+}

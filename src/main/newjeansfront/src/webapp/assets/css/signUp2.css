@@ -1,0 +1,122 @@
+
+
+.modal.in {
+    display: block;
+}
+
+.modal-dialog {
+    transform: translate(0, 0);
+    margin: 80px auto;
+    width: 80%;
+    max-width: 800px;
+}
+
+.modal-content {
+    border-radius: 3px;
+    color: #212121;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 5px 15px;
+    border: none;
+    background-color: #fff;
+}
+
+.modal_article {
+    background: #fafafa;
+    color: #212121;
+    padding: 32px 24px 24px;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+.close {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    padding: 8px;
+    opacity: 0.3;
+    font-size: 16px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin: 0 0 24px;
+    font-weight: bold;
+}
+
+.form-label {
+    color: #212121;
+    text-align: left;
+}
+
+.checkbox {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.must-privacy-content {
+    height: 200px;
+    border: 1px solid #dfe0df;
+    margin-top: -5px;
+    border-radius: 4px;
+    padding: 12px 14px;
+    overflow-y: auto;
+    background: #fff;
+    color: #000;
+    font-size: small;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.btn {
+    font-size: 12px;
+    border-radius: 3px;
+    padding: 10px 25px;
+    margin-left: 25px;
+    margin-right: 20px;
+    cursor: pointer;
+    text-transform: none;
+    font-family: inherit;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.btn-primary-custom {
+    background-color: #106EEA;
+    border-color: #106EEA;
+    color: #fff;
+    padding-left: 125px;
+    padding-right: 150px;
+}
+
+.btn-default-custom {
+    background-color: #fff;
+    border-color: #000;
+    color: #000;
+    border: 1px solid #000;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.float_l {
+    float: left;
+}
+
+a {
+    transition: all 0.3s ease;
+    color: #337ab7;
+    text-decoration: none;
+}
+
+em.alert {
+    color: red;
+}
