@@ -28,5 +28,18 @@ public class ArcController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    @GetMapping("/category/{categoryId}") // 카테고리별 검색 기능
+    public List<Articles> getArticlesByCategory(@PathVariable int categoryId) {
+        return arcservice.getArticlesByCategory(categoryId);
+    }
+
+    @GetMapping("/keywordsearch") // 카테고리 내 키워드 검색 기능
+    public List<Articles> searchArticles(
+            @RequestParam int categoryId,
+            @RequestParam String keyword) {
+        return arcservice.searchArticlesByCategoryAndKeyword(categoryId, keyword);
+    }
+
 }
 

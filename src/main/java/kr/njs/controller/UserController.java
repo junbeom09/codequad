@@ -44,7 +44,7 @@ public class UserController {
     }
     //테스트
 
-    @PostMapping("/userLogin")
+    @PostMapping("/userLogin") // 로그인 기능
     public String userLogin(@RequestBody User user) {
         User loginUser = userService.login(user.getUs_id(), user.getUs_password());
         if (loginUser != null) {

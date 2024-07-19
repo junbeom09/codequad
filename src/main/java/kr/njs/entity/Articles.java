@@ -13,4 +13,6 @@ public class Articles {
     private String at_url; // 기사 경로
     private String at_created; // 기사 작성일
     private int at_cate; // 카테고리
+    private String category_name; // 카테고리 이름
+
 }

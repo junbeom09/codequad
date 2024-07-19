@@ -21,4 +21,13 @@ public class ArcService {
         System.out.println("Articles: " + articles); // 디버깅 용도
         return articles;
     }
+
+    public List<Articles> getArticlesByCategory(int categoryId) {
+        return arcRepository.findByCategory(categoryId);
+    }
+
+    public List<Articles> searchArticlesByCategoryAndKeyword(int categoryId, String keyword) {
+        return arcRepository.searchByCategoryAndKeyword(categoryId, keyword);
+    }
+
 }
