@@ -13,4 +13,5 @@
         SELECT kakao_nickname FROM kakao WHERE kakao_id = #{id}
     </select>
 
+
 </mapper>
