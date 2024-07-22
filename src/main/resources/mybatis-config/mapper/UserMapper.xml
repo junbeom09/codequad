@@ -28,4 +28,8 @@
         WHERE user_id = #{us_id} AND user_password = #{us_password}
     </select>
 
+    <update id="updateLastLogoutTime">
+        UPDATE user SET last_logout_time = #{logoutTime} WHERE user_id as us_id = #{userId}
+    </update>
+
 </mapper>

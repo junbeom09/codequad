@@ -1,12 +1,15 @@
 package kr.njs.service;
 
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import kr.njs.entity.User;
 import kr.njs.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -34,4 +37,13 @@ public class UserService {
         System.out.println("Returned user: " + (user != null ? user.toString() : "null"));
         return user;
     }
+
+    public void logout(HttpSession session) {
+        String userId = (String) session.getAttribute("us_id");
+        if (userId != null) {
+            userRepository.updateLastLogoutTime(userId, LocalDateTime.now());
+        }
+        session.invalidate();
+    }
+
 }

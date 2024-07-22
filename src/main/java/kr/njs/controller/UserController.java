@@ -1,5 +1,6 @@
 package kr.njs.controller;
 
+import jakarta.servlet.http.HttpSession;
 import kr.njs.entity.User;
 import kr.njs.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +53,12 @@ public class UserController {
         } else {
             return "로그인 실패 : 잘못된 비밀번호 또는 아이디";
         }
+    }
+
+    @PostMapping("/userLogout") // 로그아웃 기능
+    public ResponseEntity<String> logout(HttpSession session) {
+        userService.logout(session);
+        return ResponseEntity.ok("Successfully logged out");
     }
 
 }
