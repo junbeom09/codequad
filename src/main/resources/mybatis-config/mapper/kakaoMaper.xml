@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.njs.repository.kakaoRepository">
+
+    <insert id="saveUser">
+        INSERT INTO kakao (kakao_id, kakao_nickname) VALUES (#{id}, #{nickname}) ON DUPLICATE KEY UPDATE kakao_nickname = #{nickname}
+    </insert>
+
+    <select id="getNicknameById" resultType="string">
+        SELECT kakao_nickname FROM kakao WHERE kakao_id = #{id}
+    </select>
+
+</mapper>
