@@ -26,8 +26,14 @@ public class ArcService {
         return arcRepository.findByCategory(categoryId);
     }
 
+    public List<Articles> getArticlesByPublisher(String publisher) {
+        return arcRepository.findByPublisher(publisher);
+    }
+
     public List<Articles> searchArticlesByCategoryAndKeyword(int categoryId, String keyword) {
         return arcRepository.searchByCategoryAndKeyword(categoryId, keyword);
     }
+
+
 
 }

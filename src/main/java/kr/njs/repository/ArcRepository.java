@@ -14,5 +14,8 @@ public interface ArcRepository {
     List<Articles> Arclist();
 
     List<Articles> findByCategory(@Param("categoryId") int categoryId);
+
+    List<Articles> findByPublisher(@Param("publisher")String publisher);
+
     List<Articles> searchByCategoryAndKeyword(@Param("categoryId") int categoryId, @Param("keyword") String keyword);
 }

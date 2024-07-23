@@ -34,6 +34,11 @@ public class ArcController {
         return arcservice.getArticlesByCategory(categoryId);
     }
 
+    @GetMapping("/publisher/{publisher}") // 언론사 별 검색 기능
+    public List<Articles> getArticlesByPublisher(@PathVariable String publisher) {
+        return arcservice.getArticlesByPublisher(publisher);
+    }
+
     @GetMapping("/keywordsearch") // 카테고리 내 키워드 검색 기능
     public List<Articles> searchArticles(
             @RequestParam int categoryId,
