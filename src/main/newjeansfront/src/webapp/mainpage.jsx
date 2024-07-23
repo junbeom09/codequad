@@ -16,6 +16,7 @@ import SignUp2 from "./Components/SignUp2";
 import MyPage from "./Components/MyPage";
 import Company from "./Components/Company";
 import {useState} from "react";
+import Search from "./Components/Search";
 
 const Mainpage = () => {
     const getCate = async (e) => {
@@ -59,9 +60,12 @@ const Mainpage = () => {
                                            placeholder="검색어를 입력해주세요"
                                            autoComplete="off"/>
                                     <div>
-                                        <button type="button" className="btn-search">
-                                            <i className="fa-solid fa-magnifying-glass"></i>
-                                        </button>
+                                        <Link to="/search">
+                                            <button type="button" className="btn-search">
+                                                <i className="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </Link>
+
                                     </div>
                                 </div>
                             </div>
@@ -386,6 +390,7 @@ const Mainpage = () => {
                     <Route path='/signUp2' element={<SignUp2/>}/>
                     <Route path='/myPage' element={<MyPage/>}/>
                     <Route path='/company' element={<Company/>}/>
+                    <Route path='/search' element={<Search/>}/>
                 </Routes>
 
                 {/*// <!-- footer -->*/}

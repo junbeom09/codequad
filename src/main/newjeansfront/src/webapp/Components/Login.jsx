@@ -4,13 +4,16 @@ import google from "../assets/img/google-icon.png";
 
 const Login = () => {
     return (
-        <div>
-            <div className="background-image"></div>
+        <div className="root">
+
             <section className="container forms">
                 <div className="inner">
                     <div className="form login">
+                        <h2>로그인</h2>
                         <div className="form-content">
+
                             <form action="#">
+
                                 <div className="field input-field">
                                     <i className="fa-solid fa-user"></i>
                                     <input type="text" placeholder="아이디" className="input" aria-label="아이디"/>
