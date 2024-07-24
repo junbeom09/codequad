@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import "../assets/css/signUp2.css";
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 
 const SignUp2 = () => {
+    const navigate = useNavigate();
     const [checkboxes, setCheckboxes] = useState({
         all: false,
         policy: false,
@@ -26,7 +27,16 @@ const SignUp2 = () => {
             return { ...newState, all: allChecked };
         });
     };
-
+    const handleJoin = (event) => {
+        event.preventDefault(); // 기본 동작 방지
+        if (!checkboxes.policy || !checkboxes.privacy) {
+            alert("모든 약관에 동의해주세요.");
+            return; // 함수 실행 중단
+        }
+        // 여기에 가입 처리 로직 추가
+        console.log("가입 처리 진행");
+        navigate('/login');
+    };
     return (
         <div>
             <div id="cocoaModal" className="modal in modal_site_join_policy">
@@ -150,7 +160,7 @@ const SignUp2 = () => {
                             </div>
 
                             <div className="btn-block clearfix">
-                                <a href="#" className="btn btn-primary-custom _join_btn float_l" onClick={() => {}}>가입하기</a>
+                                <Link to="/login" className="btn btn-primary-custom _join_btn float_l" onClick={handleJoin}>가입하기</Link>
                                 <Link to="/" className="btn btn-default-custom float_l">취소</Link>
                             </div>
                         </article>

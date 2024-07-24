@@ -7,7 +7,7 @@ const SignUp = () => {
         <div className="signup-page-container">
             <div className="form-container">
                 <form action="thank-you.html">
-                    <div className="form-step"><h2>정보입력</h2></div>
+                    <div className="form-step"><h2>회원가입</h2></div>
                     <div className="form-group fullname">
                         <label htmlFor="fullname">아이디</label>
                         <div style={{display: "flex"}}>

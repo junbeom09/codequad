@@ -36,7 +36,7 @@ const Login = () => {
             <section className="container forms">
                 <div className="inner">
                     <div className="form login">
-                        <h2>로그인</h2>
+                        <h2 style={{textAlign:"center"}}>로그인</h2>
                         {message && (
                             <div className={`message ${isSuccess ? 'success' : 'error'}`}>
                                 {message}

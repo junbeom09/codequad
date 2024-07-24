@@ -1,5 +1,5 @@
 import React from 'react';
-import "./assets/css/mainpage.css";
+
 import "./assets/css/header.css";
 import "./assets/css/footer.css";
 import {newjinsContext} from "./context/newjinsContext";
