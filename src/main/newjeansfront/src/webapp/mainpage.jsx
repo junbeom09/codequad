@@ -1,9 +1,9 @@
 import React from 'react';
-
+import "./assets/css/mainpage.css";
 import "./assets/css/header.css";
 import "./assets/css/footer.css";
 import {newjinsContext} from "./context/newjinsContext";
-import {Routes, Route, Link} from "react-router-dom";
+import {Routes, Route, NavLink, Link} from "react-router-dom";
 import Home from "./Components/Home";
 import Category from "./Components/Category";
 import Recommend from "./Components/Recommend";
@@ -16,7 +16,6 @@ import SignUp2 from "./Components/SignUp2";
 import MyPage from "./Components/MyPage";
 import Company from "./Components/Company";
 import {useState} from "react";
-import Search from "./Components/Search";
 
 const Mainpage = () => {
     const getCate = async (e) => {
@@ -60,12 +59,9 @@ const Mainpage = () => {
                                            placeholder="검색어를 입력해주세요"
                                            autoComplete="off"/>
                                     <div>
-                                        <Link to="/search">
-                                            <button type="button" className="btn-search">
-                                                <i className="fa-solid fa-magnifying-glass"></i>
-                                            </button>
-                                        </Link>
-
+                                        <button type="button" className="btn-search">
+                                            <i className="fa-solid fa-magnifying-glass"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -89,17 +85,17 @@ const Mainpage = () => {
                         <div className="inner_gnb">
                             <h2 className="screen_out">뉴스 메인메뉴</h2>
                             <ul className="gnb_comm" data-tiara-layer="GNB tab" style={{display: "flex"}}>
-                                <li className="on">
-                                    <Link to="/" className="link_gnb">
-                                        <span className="txt_gnb">홈</span></Link>
+                                <li>
+                                    <NavLink to="/" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb">홈</span></NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/recommend" className="link_gnb">
-                                        <span className="txt_gnb">추천</span></Link>
+                                    <NavLink to="/recommend" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb">추천</span></NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/subscribe" className="link_gnb">
-                                        <span className="txt_gnb">구독</span></Link>
+                                    <NavLink to="/subscribe" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb">구독</span></NavLink>
                                 </li>
                                 <div className="sep-line">
                                     <div className="sep-line-br"></div>
@@ -108,40 +104,40 @@ const Mainpage = () => {
 
 
                                 <li>
-                                    <Link to="/category" className="link_gnb">
-                                        <span className="txt_gnb" onClick={getCate}>사회</span></Link>
+                                    <NavLink to="/category" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb" onClick={getCate}>사회</span></NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/category" className="link_gnb">
-                                        <span className="txt_gnb" onClick={getCate}>정치</span></Link>
+                                    <NavLink to="/category" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb" onClick={getCate}>정치</span></NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/category" className="link_gnb">
-                                        <span className="txt_gnb" onClick={getCate}>경제</span></Link>
+                                    <NavLink to="/category" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb" onClick={getCate}>경제</span></NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/category" className="link_gnb">
-                                        <span className="txt_gnb" onClick={getCate}>국제</span></Link>
+                                    <NavLink to="/category" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb" onClick={getCate}>국제</span></NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/category" className="link_gnb">
-                                        <span className="txt_gnb" onClick={getCate}>문화</span></Link>
+                                    <NavLink to="/category" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb" onClick={getCate}>문화</span></NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/category" className="link_gnb">
-                                        <span className="txt_gnb" onClick={getCate}>IT</span></Link>
+                                    <NavLink to="/category" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb" onClick={getCate}>IT</span></NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/category" className="link_gnb">
-                                        <span className="txt_gnb" onClick={getCate}>스포츠</span></Link>
+                                    <NavLink to="/category" className="link_gnb" activeClassName="active">
+                                        <span className="txt_gnb" onClick={getCate}>스포츠</span></NavLink>
                                 </li>
 
                                 <div className="sep-line">
                                     <div className="sep-line-br"></div>
                                     {/*// <!-- 구분선 -->*/}
                                 </div>
-                                <li><Link to="/company" className="link_gnb">
-                                    <span className="txt_gnb">MBC</span></Link></li>
+                                <li><NavLink to="/company" className="link_gnb" activeClassName="active">
+                                    <span className="txt_gnb">MBC</span></NavLink></li>
                                 <li><a href="" className="link_gnb">
                                     <span className="txt_gnb">머니투데이</span></a></li>
                                 <li><a href="" className="link_gnb">
@@ -156,8 +152,8 @@ const Mainpage = () => {
                                     <span className="txt_gnb">JTBC</span></a></li>
                                 <li><a href="" className="link_gnb">
                                     <span className="txt_gnb">YTN</span></a></li>
-                                <li><Link to="/myPage" className="link_gnb">
-                                    <span className="txt_gnb">조선일보</span></Link></li>
+                                <li><NavLink to="/myPage" className="link_gnb" activeClassName="active">
+                                    <span className="txt_gnb">조선일보</span></NavLink></li>
                                 <li><a href="#" className="btn-press">
                                     <span
                                         onClick={openPressBox}
@@ -176,17 +172,17 @@ const Mainpage = () => {
                                         <button type="button" onClick={closePressBox} className="btn-close">X</button>
                                         <ul class="press-list">
                                         <li>
-                                        <Link to="/company" class="providerClick2">
+                                        <a href="" class="providerClick2">
                                         <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_07101201.png" alt="디지털타임스"/>
-                                        </Link>
+                                        </a>
                                         <button type="button" class="btn-press-sel">
                                         <span class="sr-only">선택</span>
                                         </button>
                                         </li>
                                         <li>
-                                        <Link to="/company" class="providerClick2">
+                                        <a href="" class="providerClick2">
                                         <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_04100158.png" alt="데일리안"/>
-                                        </Link>
+                                        </a>
                                         <button type="button" class="btn-press-sel">
                                         <span class="sr-only">선택</span>
                                         </button>
@@ -316,53 +312,53 @@ const Mainpage = () => {
                                         <img loading="lazy" src="https://www.ddaily.co.kr/assets/images/common/logo.png" style={{width: "110px", height: "20px"}} alt="디지털데일리"/>
                                         </Link>
                                             <button type="button" class="btn-press-sel">
-                                                <span class="sr-only">선택</span>
-                                            </button>
-                                        </li>
-                                        <li>
-                            <Link to="/company" class="providerClick2">
+                                <span class="sr-only">선택</span>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="" class="providerClick2">
                                 <img loading="lazy" src="https://zdnet.co.kr/images/zdnet_logo.png?ver=20220830" style={{width: "110px", height: "20px"}} alt="지디넷코리아"/>
-                            </Link>
+                            </a>
                             <button type="button" class="btn-press-sel">
                                 <span class="sr-only">선택</span>
                             </button>
                         </li>
                         <li>
-                            <Link to="/company" class="providerClick2">
+                            <a href="" class="providerClick2">
                                 <img loading="lazy" src="https://www.yonhapnewstv.co.kr/asset/img/common/img_logo_yhntv_navy.png" style={{width: "110px", height: "20px"}} alt="연합뉴스tv"/>
-                            </Link>
+                            </a>
                             <button type="button" class="btn-press-sel">
                                 <span class="sr-only">선택</span>
                             </button>
                         </li>
                         <li>
-                            <Link to="/company" class="providerClick2">
+                            <a href="" class="providerClick2">
                                 <img loading="lazy" src="./img/chosunBiz.png" alt="조선비즈"/>
-                            </Link>
+                            </a>
                             <button type="button" class="btn-press-sel">
                                 <span class="sr-only">선택</span>
                             </button>
                         </li>
                         <li>
-                            <Link to="/company" class="providerClick2">
+                            <a href="" class="providerClick2">
                                 <img loading="lazy" src="./img/koreaEconomic.png" alt="한국경제tv"/>
-                            </Link>
+                            </a>
                             <button type="button" class="btn-press-sel">
                                 <span class="sr-only">선택</span>
                             </button>
                         </li>
                         <li>
-                            <Link to="/company" class="providerClick2">
+                            <a href="" class="providerClick2">
                                 <img loading="lazy" src="https://menu.moneys.co.kr/moneys/assets/20240717163719/images/logo_moneys.svg" alt="머니s"/>
-                            </Link>
+                            </a>
                             <button type="button" class="btn-press-sel">
                                 <span class="sr-only">선택</span>
                             </button>
                         </li>
                         <li>
-                            <Link to="/company" class="providerClick2">
+                            <a href="" class="providerClick2">
                                 <img loading="lazy" src="./img/eyeNews.png" alt="아이뉴스24"/>
-                            </Link>
+                            </a>
                             <button type="button" class="btn-press-sel">
                                 <span class="sr-only">선택</span>
                             </button>
@@ -390,7 +386,6 @@ const Mainpage = () => {
                     <Route path='/signUp2' element={<SignUp2/>}/>
                     <Route path='/myPage' element={<MyPage/>}/>
                     <Route path='/company' element={<Company/>}/>
-                    <Route path='/search' element={<Search/>}/>
                 </Routes>
 
                 {/*// <!-- footer -->*/}

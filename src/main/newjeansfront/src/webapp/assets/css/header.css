@@ -3,6 +3,9 @@
     padding: 0;
     border-radius: 0;
 }
+.link_gnb.active{
+    color: #0089ff; /* 홈 글자와 같은 색으로 변경 */
+}
 .header {
     position: relative;
     display: block;

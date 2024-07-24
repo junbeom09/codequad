@@ -4,20 +4,30 @@ import axios from "axios";
 
 
 const Home = () => {
+    const [newsList,setNewsList] = useState([]);
+    const [visibleCount, setVisibleCount] = useState(10);
+    const [allArticles, setAllArticles] = useState([]);
+
     useEffect(() => {
         fetchArticles();
     }, []);
-    const [newsList,setNewsList] = useState([]);
+
     const fetchArticles = async () => {
 
 
         try {
             const response = await axios.get('http://localhost:8081/api/newsArticles');
-            console.log('Fetched articles:', response.data[0]);
-            setNewsList(response.data);
+            console.log('Fetched articles:', response.data);
+            setAllArticles(response.data); // 모든 기사 저장
+            setNewsList(response.data.slice(0, visibleCount)); // 초기 15개 기사 표시
         } catch (error) {
             console.error('Error fetching articles:', error);
         }
+    };
+    const loadMoreArticles = () => {
+        const newVisibleCount = visibleCount + 10; // 더보기 버튼 클릭 시 10개씩 추가
+        setNewsList(allArticles.slice(0, newVisibleCount));
+        setVisibleCount(newVisibleCount);
     };
 
     return (
@@ -32,7 +42,7 @@ const Home = () => {
                                 <h3 className="screen_out">오늘의 이슈</h3>
                                 <ul className="list_newsissue">
                                     {/*// <!-- 15개의 li 요소 반복-->*/}
-                                    {newsList.map(item=>(<li>
+                                    {newsList.map(item=>(<li key={item.arti_id}>
                                         <div className="item_issue" data-tiara-layer="headline1"><a
                                             className="wrap_thumb" data-tiara-layer="article_main" href=""><img
                                             className="thumb_g" src={item.arti_pig}/></a>
@@ -50,6 +60,11 @@ const Home = () => {
                                         </div>
                                     </li>))}
                                 </ul>
+                                {visibleCount < allArticles.length && ( // 더보기 버튼 조건부 렌더링
+                                    <div className="load-more-container">
+                                        <button onClick={loadMoreArticles} className="load-more-button">기사 더보기</button>
+                                    </div>
+                                )}
                             </div>
                             {/*// <!-- 추천 뉴스 -->*/}
                             <div className="box_g" data-tiara-layer="today_series">

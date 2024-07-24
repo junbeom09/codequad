@@ -8,7 +8,7 @@
     <select id="Arclist" resultType="kr.njs.entity.Articles">
         SELECT * FROM Articles
         ORDER BY arti_created DESC
-        LIMIT 30
+        LIMIT 200
     </select>
 
     <select id="findByCategory" resultType="kr.njs.entity.Articles">

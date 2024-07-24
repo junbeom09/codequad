@@ -647,3 +647,22 @@ img, fieldset {
 .btn-login a {
     color: #fff;
 }
+
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.load-more-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.load-more-button:hover {
+    background-color: #0056b3;
+}
