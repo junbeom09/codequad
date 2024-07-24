@@ -12,10 +12,12 @@
     </select>
 
     <select id="findByCategory" resultType="kr.njs.entity.Articles">
-        SELECT a.*, c.category_name
+        SELECT a.*
         FROM Articles a
                  JOIN Categories c ON a.arti_cate = c.category_id
         WHERE a.arti_cate = #{categoryId}
+        ORDER BY arti_created DESC
+        LIMIT 150
     </select>
 
     <select id="searchByCategoryAndKeyword" resultType="kr.njs.entity.Articles">

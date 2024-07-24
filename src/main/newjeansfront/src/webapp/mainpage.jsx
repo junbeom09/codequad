@@ -18,15 +18,16 @@ import Company from "./Components/Company";
 import {useState} from "react";
 
 const Mainpage = () => {
+    const [cateNews, setCateNews] = useState([]);
+    const [cateNum,setCateNum] = useState(0);
     const getCate = async (e) => {
         try {
-            const text = e.target.innerText;
-            const response = await axios.post('http://localhost:8081/api/endpoint', text, {
-                headers: {
-                    'Content-Type': 'text/plain'
-                }
-            });
-            console.log(response.data);
+            console.log(e.target.getAttribute("alt"))
+            const cate = parseInt(e.target.getAttribute("alt"));
+            const response = await fetchArticlesByCategory(cate);
+            setCateNews(response.data);
+            setCateNum(cate);
+
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
         }
@@ -40,8 +41,17 @@ const Mainpage = () => {
     const closePressBox = () => {
         setShowPressBox(false);
     };
+
+    const fetchArticlesByCategory = async (categoryId) => {
+        try {
+            const response = await axios.get(`http://localhost:8081/api/category/${categoryId}`);
+            return response;
+        } catch (error) {
+            console.error('Error fetching articles by category:', error);
+        }
+    };
     return (
-        <newjinsContext.Provider value={{}}>
+        <newjinsContext.Provider value={{cateNews,setCateNews,cateNum,setCateNum}}>
             <div className="container-doc">
                 <header id="header" className="header">
                     <div className="hd-top">
@@ -105,31 +115,31 @@ const Mainpage = () => {
 
                                 <li>
                                     <NavLink to="/category" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb" onClick={getCate}>사회</span></NavLink>
+                                        <span className="txt_gnb" onClick={getCate} alt="1">사회</span></NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/category" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb" onClick={getCate}>정치</span></NavLink>
+                                        <span className="txt_gnb" onClick={getCate} alt="2">정치</span></NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/category" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb" onClick={getCate}>경제</span></NavLink>
+                                        <span className="txt_gnb" onClick={getCate} alt="3">경제</span></NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/category" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb" onClick={getCate}>국제</span></NavLink>
+                                        <span className="txt_gnb" onClick={getCate} alt="4">국제</span></NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/category" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb" onClick={getCate}>문화</span></NavLink>
+                                        <span className="txt_gnb" onClick={getCate} alt="5">문화</span></NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/category" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb" onClick={getCate}>IT</span></NavLink>
+                                        <span className="txt_gnb" onClick={getCate} alt="6">IT</span></NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/category" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb" onClick={getCate}>스포츠</span></NavLink>
+                                        <span className="txt_gnb" onClick={getCate} alt="7">스포츠</span></NavLink>
                                 </li>
 
                                 <div className="sep-line">
