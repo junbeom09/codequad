@@ -1,7 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import "../assets/css/mainpage.css";
+import axios from "axios";
+
 
 const Home = () => {
+    useEffect(() => {
+        fetchArticles();
+    }, []);
+    const [newsList,setNewsList] = useState([]);
+    const fetchArticles = async () => {
+
+
+        try {
+            const response = await axios.get('http://localhost:8081/api/newsArticles');
+            console.log('Fetched articles:', response.data[0]);
+            setNewsList(response.data);
+        } catch (error) {
+            console.error('Error fetching articles:', error);
+        }
+    };
+
     return (
         <div>
             {/*// <!-- 메인 시작 -->*/}
@@ -14,278 +32,23 @@ const Home = () => {
                                 <h3 className="screen_out">오늘의 이슈</h3>
                                 <ul className="list_newsissue">
                                     {/*// <!-- 15개의 li 요소 반복-->*/}
-                                    <li>
+                                    {newsList.map(item=>(<li>
                                         <div className="item_issue" data-tiara-layer="headline1"><a
                                             className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
+                                            className="thumb_g" src={item.arti_pig}/></a>
                                             <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
+                                                className="logo_cp"><img className="thumb_g" src={item.arti_pic}
+                                                                         alt={item.publisher}/></span><span
+                                                className="txt_category">{item.arti_cate}</span></span><strong
                                                 className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
+                                                className="link_txt" data-tiara-layer="article_main" href="">{item.at_title}</a></strong><span
                                                 style={{
                                                     fontSize: "x-small",
                                                     color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
+                                                }}>{item.arti_content}</span>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src=""/></a>
-                                            <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt="전자신문"/></span><span
-                                                className="txt_category">IT/과학</span></span><strong
-                                                className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">'韓
-                                                경고등'…차세대 패키징 선점 위해 日·美 소부장 뭉쳤다</a></strong><span
-                                                style={{
-                                                    fontSize: "x-small",
-                                                    color: "rgb(121, 119, 119)"
-                                                }}>뉴스 요약 내용</span>
-                                            </div>
-                                        </div>
-                                    </li>
-
-
+                                    </li>))}
                                 </ul>
                             </div>
                             {/*// <!-- 추천 뉴스 -->*/}

@@ -6,13 +6,9 @@
 <mapper namespace="kr.njs.repository.ArcRepository">
 
     <select id="Arclist" resultType="kr.njs.entity.Articles">
-        SELECT
-            arti_title AS at_title,
-            arti_content AS at_content,
-            arti_pic AS at_url,
-            arti_created AS at_created,
-            arti_cate AS at_cate
-        FROM Articles
+        SELECT * FROM Articles
+        ORDER BY arti_created DESC
+        LIMIT 30
     </select>
 
     <select id="findByCategory" resultType="kr.njs.entity.Articles">
