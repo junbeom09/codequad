@@ -1,26 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { userLogin } from '../service/api';
 import "../assets/css/login.css";
 import google from "../assets/img/google-icon.png";
 
 const Login = () => {
+    const [userId, setUserId] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const [isSuccess, setIsSuccess] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const result = await userLogin({ us_id: userId, us_password: password });
+            if (result.includes("로그인 성공")) {
+                setIsSuccess(true);
+                setMessage("로그인 성공! 잠시 후 메인 페이지로 이동합니다.");
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000); // 2초 후 메인 페이지로 이동
+            } else {
+                setIsSuccess(false);
+                setMessage("로그인 실패, 잘못된 아이디 또는 비밀번호입니다.");
+            }
+        } catch (error) {
+            setIsSuccess(false);
+            setMessage("로그인 실패: " + (error.response?.data || error.message));
+        }
+    };
+
     return (
         <div className="root">
-
             <section className="container forms">
                 <div className="inner">
                     <div className="form login">
                         <h2>로그인</h2>
+                        {message && (
+                            <div className={`message ${isSuccess ? 'success' : 'error'}`}>
+                                {message}
+                            </div>
+                        )}
                         <div className="form-content">
-
-                            <form action="#">
-
+                            <form onSubmit={handleLogin}>
                                 <div className="field input-field">
                                     <i className="fa-solid fa-user"></i>
-                                    <input type="text" placeholder="아이디" className="input" aria-label="아이디"/>
+                                    <input
+                                        type="text"
+                                        placeholder="아이디"
+                                        className="input"
+                                        aria-label="아이디"
+                                        value={userId}
+                                        onChange={(e) => setUserId(e.target.value)}
+                                    />
                                 </div>
                                 <div className="field input-field">
                                     <i className="fa-solid fa-lock"></i>
-                                    <input type="password" placeholder="비밀번호" className="input" aria-label="비밀번호"/>
+                                    <input
+                                        type="password"
+                                        placeholder="비밀번호"
+                                        className="input"
+                                        aria-label="비밀번호"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
                                 </div>
                                 <div className="form-link">
                                     <a href="#" className="forgot-pass">비밀번호를 잊으셨나요?</a>
