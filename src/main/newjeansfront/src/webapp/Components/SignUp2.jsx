@@ -1,9 +1,13 @@
+// SignUp2.jsx
 import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import axios from 'axios';
 import "../assets/css/signUp2.css";
-import {Link,useNavigate} from "react-router-dom";
 
 const SignUp2 = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const formData = location.state || {};
     const [checkboxes, setCheckboxes] = useState({
         all: false,
         policy: false,
@@ -27,16 +31,22 @@ const SignUp2 = () => {
             return { ...newState, all: allChecked };
         });
     };
-    const handleJoin = (event) => {
-        event.preventDefault(); // 기본 동작 방지
+
+    const handleJoin = async (event) => {
+        event.preventDefault();
         if (!checkboxes.policy || !checkboxes.privacy) {
             alert("모든 약관에 동의해주세요.");
-            return; // 함수 실행 중단
+            return;
         }
-        // 여기에 가입 처리 로직 추가
-        console.log("가입 처리 진행");
-        navigate('/login');
+        try {
+            const response = await axios.post('http://localhost:8081/api/userAdd', formData);
+            console.log("가입 처리 진행", response.data);
+            navigate('/login');
+        } catch (error) {
+            console.error("회원가입 실패: ", error.response ? error.response.data : error.message);
+        }
     };
+
     return (
         <div>
             <div id="cocoaModal" className="modal in modal_site_join_policy">

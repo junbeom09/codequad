@@ -18,6 +18,7 @@ import Company from "./Components/Company";
 import {useState} from "react";
 
 const Mainpage = () => {
+    const isLogin = null;
     const [cateNews, setCateNews] = useState([]);
     const [cateNum,setCateNum] = useState(0);
     const getCate = async (e) => {
@@ -76,15 +77,17 @@ const Mainpage = () => {
                                 </div>
                             </div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
-                                <div className="login-area">
-                                    <button type="button" className="btn-login">
-                                        <Link to="/login">로그인</Link>
-                                    </button>
-                                </div>
+                                {isLogin === null && (<div className="login-area">
+                                    <Link to="/login"><button type="button" className="btn-login">
+                                        로그인
+                                    </button></Link>
+                                </div>)}
                                 <div className="login-area2">
-                                    <button type="button" className="btn-login">
-                                        <Link to="/signUp">회원가입</Link>
-                                    </button>
+                                    {isLogin === null ? (<Link to="/signUp"><button type="button" className="btn-login">
+                                        회원가입
+                                    </button></Link>) : (<Link to="/myPage"><button type="button" className="btn-login">
+                                        마이페이지
+                                    </button></Link>)}
                                 </div>
                             </div>
                         </div>
@@ -137,11 +140,6 @@ const Mainpage = () => {
                                     <NavLink to="/category" className="link_gnb" activeClassName="active">
                                         <span className="txt_gnb" onClick={getCate} alt="6">IT</span></NavLink>
                                 </li>
-                                <li>
-                                    <NavLink to="/category" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb" onClick={getCate} alt="7">스포츠</span></NavLink>
-                                </li>
-
                                 <div className="sep-line">
                                     <div className="sep-line-br"></div>
                                     {/*// <!-- 구분선 -->*/}

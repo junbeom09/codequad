@@ -7,7 +7,7 @@
 
     <insert id="Joinuser" parameterType="kr.njs.entity.User">
         INSERT INTO Users (user_name, user_email, user_password, user_birthdate, user_id, user_joined)
-        VALUES (#{us_name}, #{us_email}, #{us_password}, #{us_birthdate}, #{us_id}, now())
+        VALUES (#{us_name}, #{us_email}, SHA2(#{us_password},256), #{us_birthdate}, #{us_id}, now())
     </insert>
 
     <update id="userUpdate">

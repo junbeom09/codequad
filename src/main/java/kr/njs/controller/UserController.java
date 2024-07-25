@@ -18,22 +18,11 @@ public class UserController {
     @PostMapping("/userAdd")// 회원가입
     public ResponseEntity<?> userAdd(@RequestBody User user) {
         try {
+            System.out.println(user);
             userService.saveUser(user);
             return ResponseEntity.ok("회원가입 완료.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("회원가입 실패: " + e.getMessage());
-        }
-    }
-
-    @PostMapping("/endpoint") //리액트로 정보 넘기는 기능
-    public ResponseEntity<String> receiveData(@RequestBody String data) {
-        try {
-            if(data.equals("경제")){
-                System.out.println("Received data: " + data);
-            }
-            return ResponseEntity.ok("데이터 '" + data + "'가 처리되었습니다");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("데이터 처리 실패: " + e.getMessage());
         }
     }
 
