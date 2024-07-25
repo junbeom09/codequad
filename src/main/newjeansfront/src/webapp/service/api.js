@@ -51,3 +51,35 @@ export const userLogout = async () => {
         throw error.response.data;
     }
 };
+
+// 카테고리별 기사 가져오기
+export const getArticlesByCategory = async (categoryId) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/category/${categoryId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+// 언론사별 기사 가져오기
+export const getArticlesByPublisher = async (publisher) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/publisher/${publisher}`);
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+// 카테고리 내 키워드 검색
+export const searchArticles = async (keyword) => {
+    try {
+        const response = await axios.get(`http://localhost:8081/api/keywordsearch`, {
+            params: { keyword }
+        });
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};

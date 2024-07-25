@@ -50,7 +50,7 @@ const Home = () => {
                                                 className="logo_cp"><img className="thumb_g" src=""
                                                                          alt={item.publisher}/></span></span><strong
                                                 className="tit_g"><a
-                                                className="link_txt" className="link_txt_title" data-tiara-layer="article_main" href={item.arti_url}>{item.arti_title}</a></strong><span
+                                                className="link_txt" data-tiara-layer="article_main" href="">{item.arti_title}</a></strong><span
                                                 style={{
                                                     fontSize: "x-small",
                                                     color: "rgb(121, 119, 119)"

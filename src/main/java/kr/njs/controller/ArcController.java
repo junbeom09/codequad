@@ -39,12 +39,14 @@ public class ArcController {
         return arcservice.getArticlesByPublisher(publisher);
     }
 
-    @GetMapping("/keywordsearch") // 카테고리 내 키워드 검색 기능
-    public List<Articles> searchArticles(
-            @RequestParam int categoryId,
-            @RequestParam String keyword) {
-        return arcservice.searchArticlesByCategoryAndKeyword(categoryId, keyword);
+    @GetMapping("/keywordsearch")
+    public ResponseEntity<List<Articles>> searchArticles(@RequestParam String keyword) {
+        try {
+            List<Articles> articles = arcservice.searchArticlesByKeyword(keyword);
+            return ResponseEntity.ok(articles);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
-
 }
 
