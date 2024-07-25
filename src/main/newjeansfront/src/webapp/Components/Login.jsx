@@ -20,8 +20,10 @@ const Login = () => {
                 setIsSuccess(true);
                 setMessage("로그인 성공! 잠시 후 메인 페이지로 이동합니다.");
                 setTimeout(() => {
+
                     navigate('/');
-                }, 2000); // 2초 후 메인 페이지로 이동
+                    window.location.reload();
+                }, 1000); // 2초 후 메인 페이지로 이동
             } else {
                 setIsSuccess(false);
                 setMessage("로그인 실패, 잘못된 아이디 또는 비밀번호입니다.");

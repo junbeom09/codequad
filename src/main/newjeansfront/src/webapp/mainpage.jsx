@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Routes, Route, NavLink, Link } from 'react-router-dom';
 import "./assets/css/mainpage.css";
 import "./assets/css/header.css";
 import "./assets/css/footer.css";
 import { newjinsContext } from "./context/newjinsContext";
-import { Routes, Route, NavLink, Link } from "react-router-dom";
 import Home from "./Components/Home";
 import Category from "./Components/Category";
 import Recommend from "./Components/Recommend";
@@ -17,6 +16,7 @@ import SignUp2 from "./Components/SignUp2";
 import MyPage from "./Components/MyPage";
 import Company from "./Components/Company";
 import Search from "./Components/Search";
+import Logout from "./Components/Logout"; // 로그아웃 컴포넌트 추가
 
 const Mainpage = () => {
     const [isLogin, setIsLogin] = useState(false);
@@ -30,14 +30,12 @@ const Mainpage = () => {
         const user = JSON.parse(sessionStorage.getItem("userInfo"));
         if (user) {
             setIsLogin(true);
-            console.log(user);
             setUserInfo(user);
         }
     }, []);
 
     const getCate = async (e) => {
         try {
-            console.log(e.target.getAttribute("alt"))
             const cate = parseInt(e.target.getAttribute("alt"));
             const response = await fetchArticlesByCategory(cate);
             setCateNews(response.data);
@@ -101,34 +99,43 @@ const Mainpage = () => {
                                         </button>
                                     </div>
                                 </div>
-                                <div style={{textAlign: "center", marginTop: "15px", display: "block"}}
+                                <div style={{ textAlign: "center", marginTop: "15px", display: "block" }}
                                      className="search-info">
-                                    <span style={{color: "#007bff"}}>기사 제목을 클릭하면 원문 링크로 이동됩니다.</span>
+                                    <span style={{ color: "#007bff" }}>기사 제목을 클릭하면 원문 링크로 이동됩니다.</span>
                                 </div>
                             </div>
-                            <div style={{display: "flex", justifyContent: "space-between"}}>
-                                {!isLogin ? (<div className="login-area">
-                                    <Link to="/login">
-                                        <button type="button" className="btn-login">
-                                            로그인
-                                        </button>
-                                    </Link>
-                                </div>): (<div className="login-area">
-                                    <Link to="/logout">
-                                        <button type="button" className="btn-login">
-                                            로그아웃
-                                        </button>
-                                    </Link>
-                                </div>)}
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                {!isLogin ? (
+                                    <div className="login-area">
+                                        <Link to="/login">
+                                            <button type="button" className="btn-login">
+                                                로그인
+                                            </button>
+                                        </Link>
+                                    </div>
+                                ) : (
+                                    <div className="login-area">
+                                        <Link to="/logout">
+                                            <button type="button" className="btn-login">
+                                                로그아웃
+                                            </button>
+                                        </Link>
+                                    </div>
+                                )}
                                 <div className="login-area2">
-                                    {!isLogin ? (<Link to="/signUp">
-                                        <button type="button" className="btn-login">
-                                            회원가입
-                                        </button>
-                                    </Link>) : (<Link to="/myPage">
-                                        <button type="button" className="btn-login">
-                                        마이페이지
-                                    </button></Link>)}
+                                    {!isLogin ? (
+                                        <Link to="/signUp">
+                                            <button type="button" className="btn-login">
+                                                회원가입
+                                            </button>
+                                        </Link>
+                                    ) : (
+                                        <Link to="/myPage">
+                                            <button type="button" className="btn-login">
+                                                마이페이지
+                                            </button>
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -155,8 +162,6 @@ const Mainpage = () => {
                                     <div className="sep-line-br"></div>
                                     {/* // <!-- 구분선 --> */}
                                 </div>
-
-
                                 <li>
                                     <NavLink to="/category" className="link_gnb" activeClassName="active">
                                         <span className="txt_gnb" onClick={getCate} alt="1">사회</span></NavLink>
@@ -424,7 +429,6 @@ const Mainpage = () => {
                 </header>
                 {/* // <!-- 헤더 끝 --> */}
 
-
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/search' element={<Search />} />
@@ -436,6 +440,7 @@ const Mainpage = () => {
                     <Route path='/signUp2' element={<SignUp2 />} />
                     <Route path='/myPage' element={<MyPage />} />
                     <Route path='/company' element={<Company />} />
+                    <Route path='/logout' element={<Logout />} /> {/* 로그아웃 경로 추가 */}
                 </Routes>
 
                 {/* // <!-- footer --> */}
@@ -467,7 +472,6 @@ const Mainpage = () => {
                 </footer>
             </div>
         </newjinsContext.Provider>
-
     );
 };
 
