@@ -42,7 +42,7 @@ public class ArcController {
     @GetMapping("/keywordsearch")
     public ResponseEntity<List<Articles>> searchArticles(@RequestParam String keyword) {
         try {
-            List<Articles> articles = arcservice.searchArticlesByKeyword(keyword);
+            List<Articles> articles = arcservice.searchArticlesByCategoryAndKeyword(keyword);
             return ResponseEntity.ok(articles);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);

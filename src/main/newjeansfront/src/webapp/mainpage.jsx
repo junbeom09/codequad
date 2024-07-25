@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import "./assets/css/mainpage.css";
 import "./assets/css/header.css";
 import "./assets/css/footer.css";
+import { useNavigate } from 'react-router-dom';
 import { newjinsContext } from "./context/newjinsContext";
 import { Routes, Route, NavLink, Link } from "react-router-dom";
 import Home from "./Components/Home";
@@ -87,7 +87,7 @@ const Mainpage = () => {
                                 </h1>
                             </div>
                             <div>
-                                <div className="srch-group input-group" style={{ display: "flex" }}>
+                                <div className="srch-group input-group" style={{display: "flex"}}>
                                     <input
                                         ref={searchInputRef}
                                         type="text"
@@ -113,11 +113,13 @@ const Mainpage = () => {
                                             로그인
                                         </button>
                                     </Link>
-                                </div>):(<div className="welcome-area">{userInfo.us_name}님 환영합니다!</div>)}
+                                </div>) : (<div className="welcome-area">{userInfo.us_name}님 환영합니다!</div>)}
                                 <div className="login-area2">
-                                    {!isLogin ? (<Link to="/signUp"><button type="button" className="btn-login">
-                                        회원가입
-                                    </button></Link>) : (<Link to="/myPage"><button type="button" className="btn-login">
+                                    {!isLogin ? (<Link to="/signUp">
+                                        <button type="button" className="btn-login">
+                                            회원가입
+                                        </button>
+                                    </Link>) : (<Link to="/myPage"><button type="button" className="btn-login">
                                         마이페이지
                                     </button></Link>)}
                                 </div>
@@ -398,7 +400,8 @@ const Mainpage = () => {
                                                     <li>
                                                         <a href="" class="providerClick2">
                                                             <img loading="lazy" src="./img/eyeNews.png" alt="아이뉴스24" />
-                                                        </a>
+                                                        </a>y
+
                                                         <button type="button" class="btn-press-sel">
                                                             <span class="sr-only">선택</span>
                                                         </button>
@@ -411,7 +414,8 @@ const Mainpage = () => {
                                 </li>
                             </ul>
                         </div>
-                    </nav>
+                    </nav>y
+
                 </header>
                 {/* // <!-- 헤더 끝 --> */}
 
