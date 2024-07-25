@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import "../assets/css/login.css";
 import google from "../assets/img/google-icon.png";
+import axios from "axios";
 
 const Login = () => {
     const [userId, setUserId] = useState('');
@@ -14,8 +14,9 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const result = await axios.post('http://localhost:8081/api/userLogin', { id: userId, pw: password });
-            if (result.data.includes("로그인 성공")) {
+            const result = await axios.post('http://localhost:8081/api/userLogin', { userId, password });
+            if (result.data.message === "로그인 성공") {
+                sessionStorage.setItem("userInfo", JSON.stringify(result.data.user));
                 setIsSuccess(true);
                 setMessage("로그인 성공! 잠시 후 메인 페이지로 이동합니다.");
                 setTimeout(() => {
@@ -65,7 +66,7 @@ const Login = () => {
                                     <a href="#" className="forgot-pass">비밀번호를 잊으셨나요?</a>
                                 </div>
                                 {message && (
-                                    <div className={`message ${isSuccess ? 'success' : 'error'}`} style={{ textAlign: "center", marginBottom: "10px" }}>
+                                    <div className={`message ${isSuccess ? 'success' : 'error'}`}>
                                         {message}
                                     </div>
                                 )}
