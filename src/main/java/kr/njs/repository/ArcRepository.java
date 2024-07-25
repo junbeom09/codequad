@@ -18,4 +18,6 @@ public interface ArcRepository {
     List<Articles> findByPublisher(@Param("publisher")String publisher);
 
     List<Articles> searchByKeyword(@Param("keyword") String keyword);
+
+    List<Articles> findByPublisher(@Param("publishers") List<String> publishers);
 }

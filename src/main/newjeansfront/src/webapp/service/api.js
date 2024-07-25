@@ -83,3 +83,39 @@ export const searchArticles = async (keyword) => {
         throw error.response.data;
     }
 };
+
+export const getUserSubscribedNews = async (userId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/user-subscribed-news/${userId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching subscribed news:', error);
+        throw error;
+    }
+};
+
+export const subscribeToNewsAgency = async (userId, agencyId) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/subscribe`, {
+            user_id: userId,
+            uc_cate: agencyId
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error subscribing:', error);
+        throw error;
+    }
+};
+
+export const unsubscribeFromNewsAgency = async (userId, agencyId) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/unsubscribe`, {
+            user_id: userId,
+            uc_cate: agencyId
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error unsubscribing:', error);
+        throw error;
+    }
+};

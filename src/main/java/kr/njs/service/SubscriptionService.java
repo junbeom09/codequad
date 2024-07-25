@@ -10,20 +10,29 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SubscriptionService {
+
     private final SubscriptionRepository subscriptionRepository;
 
-    public void subscribeToCategory(String user_id, int uc_cate) {
+    public void subscribeToNewsAgency(String userId, Integer newsAgencyId) {
+        if (subscriptionRepository.findByUserIdAndUcCate(userId, newsAgencyId) != null) {
+            throw new RuntimeException("Already subscribed to this news agency");
+        }
+
         Subscription subscription = new Subscription();
-        subscription.setUser_id(user_id);
-        subscription.setUc_cate(uc_cate);
+        subscription.setUser_id(userId);
+        subscription.setUc_cate(newsAgencyId);
         subscriptionRepository.insert(subscription);
     }
 
-    public void unsubscribeFromCategory(String user_id, int uc_cate) {
-        subscriptionRepository.deleteByUserIdAndUcCate(user_id, uc_cate);
+    public void unsubscribeFromNewsAgency(String userId, Integer newsAgencyId) {
+        Subscription subscription = subscriptionRepository.findByUserIdAndUcCate(userId, newsAgencyId);
+        if (subscription == null) {
+            throw new RuntimeException("Subscription not found");
+        }
+        subscriptionRepository.delete(subscription);
     }
 
-    public List<Integer> getUserSubscriptions(String user_id) {
-        return subscriptionRepository.findCategoriesByUserId(user_id);
+    public List<Integer> getUserSubscriptions(String userId) {
+        return subscriptionRepository.findByUserId(userId);
     }
 }

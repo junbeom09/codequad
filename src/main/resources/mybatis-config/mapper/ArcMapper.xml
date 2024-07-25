@@ -32,4 +32,15 @@
         SELECT * FROM Articles WHERE publisher = #{publisher}
     </select>
 
+    <select id="findByPublishers" resultType="kr.njs.entity.Articles">
+        SELECT * FROM Articles
+        WHERE publisher IN
+        <foreach item="item" index="index" collection="publishers"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY arti_created DESC
+        LIMIT 200
+    </select>
+
 </mapper>

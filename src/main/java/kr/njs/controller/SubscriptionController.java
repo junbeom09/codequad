@@ -1,6 +1,8 @@
 package kr.njs.controller;
 
+import kr.njs.entity.Articles;
 import kr.njs.entity.Subscription;
+import kr.njs.service.ArcService;
 import kr.njs.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,34 +17,36 @@ import java.util.List;
 public class SubscriptionController {
 
     private final SubscriptionService subscriptionService;
+    private final ArcService arcservice;
 
-    @PostMapping("/subscribe") // 구독 기능
-    public ResponseEntity<?> subscribeToCategory(@RequestBody Subscription subscription) {
+    @PostMapping("/subscribe")
+    public ResponseEntity<?> subscribeToNewsAgency(@RequestBody Subscription subscription) {
         try {
-            subscriptionService.subscribeToCategory(subscription.getUser_id(), subscription.getUc_cate());
-            return ResponseEntity.ok("Successfully subscribed to category " + subscription.getUc_cate());
+            subscriptionService.subscribeToNewsAgency(subscription.getUser_id(), subscription.getUc_cate());
+            return ResponseEntity.ok("Successfully subscribed to news agency " + subscription.getUc_cate());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Failed to subscribe: " + e.getMessage());
         }
     }
 
-    @PostMapping("/unsubscribe") // 구독 취소 기능
-    public ResponseEntity<?> unsubscribeFromCategory(@RequestBody Subscription subscription) {
+    @PostMapping("/unsubscribe")
+    public ResponseEntity<?> unsubscribeFromNewsAgency(@RequestBody Subscription subscription) {
         try {
-            subscriptionService.unsubscribeFromCategory(subscription.getUser_id(), subscription.getUc_cate());
-            return ResponseEntity.ok("Successfully unsubscribed from category " + subscription.getUc_cate());
+            subscriptionService.unsubscribeFromNewsAgency(subscription.getUser_id(), subscription.getUc_cate());
+            return ResponseEntity.ok("Successfully unsubscribed from news agency " + subscription.getUc_cate());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Failed to unsubscribe: " + e.getMessage());
         }
     }
 
-    @GetMapping("/user-categories/{user_id}")
-    public ResponseEntity<?> getUserSubscribedCategories(@PathVariable String user_id) {
+    @GetMapping("/user-subscribed-news/{user_id}")
+    public ResponseEntity<?> getUserSubscribedNews(@PathVariable String user_id) {
         try {
-            List<Integer> categories = subscriptionService.getUserSubscriptions(user_id);
-            return ResponseEntity.ok(categories);
+            List<Integer> subscribedNewsAgencies = subscriptionService.getUserSubscriptions(user_id);
+            List<Articles> articles = arcservice.getNewsByNewsAgencies(subscribedNewsAgencies);
+            return ResponseEntity.ok(articles);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to get subscribed categories: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Failed to get subscribed news: " + e.getMessage());
         }
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,12 @@ public class ArcService {
 
     public List<Articles> searchArticlesByCategoryAndKeyword(String keyword) {
         return arcRepository.searchByKeyword(keyword);
+    }
+
+    public List<Articles> getNewsByNewsAgencies(List<Integer> newsAgencyIds) {
+        return newsAgencyIds.stream()
+                .flatMap(id -> arcRepository.findByPublisher(String.valueOf(id)).stream())
+                .collect(Collectors.toList());
     }
 
 
