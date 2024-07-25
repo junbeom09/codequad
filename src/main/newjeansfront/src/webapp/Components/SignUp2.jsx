@@ -44,6 +44,7 @@ const SignUp2 = () => {
             navigate('/login');
         } catch (error) {
             console.error("회원가입 실패: ", error.response ? error.response.data : error.message);
+            alert("회원가입 실패: " + (error.response ? error.response.data : error.message));
         }
     };
 

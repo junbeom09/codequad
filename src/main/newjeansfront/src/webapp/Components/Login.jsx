@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { userLogin } from '../service/api';
+import axios from 'axios';
 import "../assets/css/login.css";
 import google from "../assets/img/google-icon.png";
 
@@ -14,8 +14,8 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const result = await userLogin({ us_id: userId, us_password: password });
-            if (result.includes("로그인 성공")) {
+            const result = await axios.post('http://localhost:8081/api/userLogin', { id: userId, pw: password });
+            if (result.data.includes("로그인 성공")) {
                 setIsSuccess(true);
                 setMessage("로그인 성공! 잠시 후 메인 페이지로 이동합니다.");
                 setTimeout(() => {
@@ -36,12 +36,7 @@ const Login = () => {
             <section className="container forms">
                 <div className="inner">
                     <div className="form login">
-                        <h2 style={{textAlign:"center"}}>로그인</h2>
-                        {message && (
-                            <div className={`message ${isSuccess ? 'success' : 'error'}`}>
-                                {message}
-                            </div>
-                        )}
+                        <h2 style={{ textAlign: "center" }}>로그인</h2>
                         <div className="form-content">
                             <form onSubmit={handleLogin}>
                                 <div className="field input-field">
@@ -69,6 +64,11 @@ const Login = () => {
                                 <div className="form-link">
                                     <a href="#" className="forgot-pass">비밀번호를 잊으셨나요?</a>
                                 </div>
+                                {message && (
+                                    <div className={`message ${isSuccess ? 'success' : 'error'}`} style={{ textAlign: "center", marginBottom: "10px" }}>
+                                        {message}
+                                    </div>
+                                )}
                                 <div className="field button-field">
                                     <button type="submit">로그인</button>
                                 </div>
@@ -83,7 +83,7 @@ const Login = () => {
                         </div>
                         <div className="media-options">
                             <a href="#" className="field google" aria-label="Login with Google account">
-                                <img src={google} className="google-icon" alt="Google Icon"/>
+                                <img src={google} className="google-icon" alt="Google Icon" />
                                 <span>구글 계정으로 로그인</span>
                             </a>
                         </div>

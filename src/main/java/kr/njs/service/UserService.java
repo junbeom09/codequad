@@ -31,8 +31,7 @@ public class UserService {
 
     @Transactional
     public User login(String us_id, String us_password) {
-        us_id = us_id.trim();
-        us_password = us_password.trim();
+
         User user = userRepository.findByIdAndPassword(us_id, us_password);
         System.out.println("Returned user: " + (user != null ? user.toString() : "null"));
         return user;

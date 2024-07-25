@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -35,12 +37,14 @@ public class UserController {
     //테스트
 
     @PostMapping("/userLogin") // 로그인 기능
-    public String userLogin(@RequestBody User user) {
-        User loginUser = userService.login(user.getUs_id(), user.getUs_password());
+    public ResponseEntity<?> userLogin(@RequestBody Map<String, String> credentials) {
+        String id = credentials.get("id");
+        String pw = credentials.get("pw");
+        User loginUser = userService.login(id, pw);
         if (loginUser != null) {
-            return "로그인 성공! " + loginUser.getUs_id();
+            return ResponseEntity.ok("로그인 성공! " + loginUser.getUs_id());
         } else {
-            return "로그인 실패 : 잘못된 비밀번호 또는 아이디";
+            return ResponseEntity.badRequest().body("로그인 실패: 잘못된 비밀번호 또는 아이디");
         }
     }
 

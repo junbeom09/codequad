@@ -45,13 +45,12 @@ const Home = () => {
                                     {newsList.map(item=>(<li key={item.arti_id}>
                                         <div className="item_issue" data-tiara-layer="headline1"><a
                                             className="wrap_thumb" data-tiara-layer="article_main" href=""><img
-                                            className="thumb_g" src={item.arti_pig}/></a>
+                                            className="thumb_g" src={item.arti_pic}/></a>
                                             <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src={item.arti_pic}
-                                                                         alt={item.publisher}/></span><span
-                                                className="txt_category">{item.arti_cate}</span></span><strong
+                                                className="logo_cp"><img className="thumb_g" src=""
+                                                                         alt={item.publisher}/></span></span><strong
                                                 className="tit_g"><a
-                                                className="link_txt" data-tiara-layer="article_main" href="">{item.at_title}</a></strong><span
+                                                className="link_txt" data-tiara-layer="article_main" href="">{item.arti_title}</a></strong><span
                                                 style={{
                                                     fontSize: "x-small",
                                                     color: "rgb(121, 119, 119)"

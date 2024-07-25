@@ -25,7 +25,7 @@
             user_birthdate as us_birthdate,
             user_joined as create_At
         FROM Users
-        WHERE user_id = #{us_id} AND user_password = #{us_password}
+        WHERE user_id = #{us_id} AND user_password = SHA2(#{us_password},256)
     </select>
 
     <update id="updateLastLogoutTime">
