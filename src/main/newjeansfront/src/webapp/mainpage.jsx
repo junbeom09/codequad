@@ -75,6 +75,9 @@ const Mainpage = () => {
                                         </button>
                                     </div>
                                 </div>
+                                <div style={{textAlign:"center", marginTop:"15px", display:"block"}} className="search-info">
+                                    <span style={{color: "#007bff"}}>기사 제목을 클릭하면 원문 링크로 이동됩니다.</span>
+                                </div>
                             </div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
                                 {isLogin === null && (<div className="login-area">
