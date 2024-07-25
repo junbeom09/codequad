@@ -30,7 +30,7 @@ public class ArcService {
         return arcRepository.findByPublisher(publisher);
     }
 
-    public List<Articles> searchArticlesByKeyword(String keyword) {
+    public List<Articles> searchArticlesByCategoryAndKeyword(String keyword) {
         return arcRepository.searchByKeyword(keyword);
     }
 
