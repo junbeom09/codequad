@@ -18,6 +18,8 @@ public interface UserRepository {
     User findByIdAndPassword(@Param("us_id") String us_id, @Param("us_password") String us_password);
 
     void updateLastLogoutTime(@Param("userId") String userId, @Param("logoutTime") LocalDateTime logoutTime);
+
+    Boolean idIdExists(String id);
 }
 
 

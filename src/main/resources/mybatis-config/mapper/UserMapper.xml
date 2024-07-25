@@ -32,4 +32,7 @@
         UPDATE user SET last_logout_time = #{logoutTime} WHERE user_id as us_id = #{userId}
     </update>
 
+    <select id="idIdExists">
+        SELECT COUNT(*) FROM Users WHERE user_id = #{id}
+    </select>
 </mapper>

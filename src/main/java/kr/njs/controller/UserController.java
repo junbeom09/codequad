@@ -50,4 +50,11 @@ public class UserController {
         return ResponseEntity.ok("Successfully logged out");
     }
 
+    @GetMapping("/isIdExists/{id}") // 아이디 중복 확인 기능
+    public ResponseEntity<Boolean> isIdExists(@PathVariable String id) {
+        boolean isIdExists = userService.isIdExists(id);
+        System.out.println(isIdExists);
+        return ResponseEntity.ok(isIdExists);
+    }
+
 }

@@ -46,4 +46,8 @@ public class UserService {
         session.invalidate();
     }
 
+    public boolean isIdExists(String id) {
+        Boolean isIdExists = userRepository.idIdExists(id);
+        return isIdExists;
+    }
 }
