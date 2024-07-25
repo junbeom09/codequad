@@ -21,7 +21,7 @@ public class UserController {
     @PostMapping("/userAdd") // 회원가입
     public ResponseEntity<?> userAdd(@RequestBody User user) {
         try {
-            System.out.println(user);
+            System.out.println(user.toString());
             userService.saveUser(user);
             return ResponseEntity.ok("회원가입 완료.");
         } catch (Exception e) {
