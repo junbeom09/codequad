@@ -18,7 +18,7 @@ public class ArcService {
 
     public List<Articles> Arclist() {
         List<Articles> articles = arcRepository.Arclist();
-        System.out.println("Articles: " + articles); // 디버깅 용도
+//        System.out.println("Articles: " + articles); // 디버깅 용도
         return articles;
     }
 
