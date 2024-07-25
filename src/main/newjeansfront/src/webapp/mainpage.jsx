@@ -113,11 +113,20 @@ const Mainpage = () => {
                                             로그인
                                         </button>
                                     </Link>
-                                </div>):(<div className="welcome-area">{userInfo.us_name}님 환영합니다!</div>)}
+                                </div>): (<div className="login-area">
+                                    <Link to="/logout">
+                                        <button type="button" className="btn-login">
+                                            로그아웃
+                                        </button>
+                                    </Link>
+                                </div>)}
                                 <div className="login-area2">
-                                    {!isLogin ? (<Link to="/signUp"><button type="button" className="btn-login">
-                                        회원가입
-                                    </button></Link>) : (<Link to="/myPage"><button type="button" className="btn-login">
+                                    {!isLogin ? (<Link to="/signUp">
+                                        <button type="button" className="btn-login">
+                                            회원가입
+                                        </button>
+                                    </Link>) : (<Link to="/myPage">
+                                        <button type="button" className="btn-login">
                                         마이페이지
                                     </button></Link>)}
                                 </div>

@@ -23,6 +23,7 @@
     position: relative;
     max-width: 1170px;
     margin: auto;
+    height: 50px;
 }
 .header .hd-top h1 {
     position: absolute;
