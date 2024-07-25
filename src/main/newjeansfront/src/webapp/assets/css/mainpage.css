@@ -666,3 +666,8 @@ img, fieldset {
 .load-more-button:hover {
     background-color: #0056b3;
 }
+
+.link_txt_title{
+    margin-top: 5px;
+    display: block;
+}
