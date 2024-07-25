@@ -10,17 +10,22 @@ import Recommend from "./Components/Recommend";
 import Subscribe from "./Components/Subscribe";
 import axios from "axios";
 import newjins_row_logo from './assets/img/newjins_row_logo.jpg';
+import { useNavigate } from 'react-router-dom';
 import Login from "./Components/Login.jsx";
 import SignUp from "./Components/SignUp.jsx";
 import SignUp2 from "./Components/SignUp2";
 import MyPage from "./Components/MyPage";
 import Company from "./Components/Company";
-import {useState} from "react";
+import {useState, useRef} from "react";
+import Search from "./Components/Search";
 
 const Mainpage = () => {
     const isLogin = null;
     const [cateNews, setCateNews] = useState([]);
     const [cateNum,setCateNum] = useState(0);
+    const navigate = useNavigate ();
+    const searchInputRef = useRef(null);
+
     const getCate = async (e) => {
         try {
             console.log(e.target.getAttribute("alt"))
@@ -51,6 +56,11 @@ const Mainpage = () => {
             console.error('Error fetching articles by category:', error);
         }
     };
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const keyword = searchInputRef.current.value;
+        navigate(`/search?keyword=${keyword}`);
+    };
     return (
         <newjinsContext.Provider value={{cateNews,setCateNews,cateNum,setCateNum}}>
             <div className="container-doc">
@@ -66,11 +76,15 @@ const Mainpage = () => {
                             </div>
                             <div>
                                 <div className="srch-group input-group" style={{display: "flex"}}>
-                                    <input id="total-search-key" type="text" className="search-key"
-                                           placeholder="검색어를 입력해주세요"
-                                           autoComplete="off"/>
+                                    <input
+                                        ref={searchInputRef}
+                                        type="text"
+                                        className="search-key"
+                                        placeholder="검색어를 입력해주세요"
+                                        autoComplete="off"
+                                    />
                                     <div>
-                                        <button type="button" className="btn-search">
+                                        <button type="button" className="btn-search" onClick={handleSearch}>
                                             <i className="fa-solid fa-magnifying-glass"></i>
                                         </button>
                                     </div>
@@ -78,14 +92,17 @@ const Mainpage = () => {
                             </div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
                                 {isLogin === null && (<div className="login-area">
-                                    <Link to="/login"><button type="button" className="btn-login">
-                                        로그인
-                                    </button></Link>
+                                    <Link to="/login">
+                                        <button type="button" className="btn-login">
+                                            로그인
+                                        </button>
+                                    </Link>
                                 </div>)}
                                 <div className="login-area2">
-                                    {isLogin === null ? (<Link to="/signUp"><button type="button" className="btn-login">
+                                    {isLogin === null ? (<Link to="/signUp">
+                                        <button type="button" className="btn-login">
                                         회원가입
-                                    </button></Link>) : (<Link to="/myPage"><button type="button" className="btn-login">
+                                        </button></Link>) : (<Link to="/myPage"><button type="button" className="btn-login">
                                         마이페이지
                                     </button></Link>)}
                                 </div>
@@ -386,6 +403,7 @@ const Mainpage = () => {
 
                 <Routes>
                     <Route path='/' element={<Home/>}/>
+                    <Route path="/search" element={<Search />} />
                     <Route path='/category' element={<Category/>}/>
                     <Route path='/recommend' element={<Recommend/>}/>
                     <Route path='/Subscribe' element={<Subscribe/>}/>

@@ -20,13 +20,12 @@
         LIMIT 150
     </select>
 
-    <select id="searchByCategoryAndKeyword" resultType="kr.njs.entity.Articles">
+    <select id="searchByKeyword" resultType="kr.njs.entity.Articles">
         SELECT a.*, c.category_name
         FROM Articles a
                  JOIN Categories c ON a.arti_cate = c.category_id
-        WHERE a.arti_cate = #{categoryId}
-          AND (a.arti_title LIKE CONCAT('%', #{keyword}, '%')
-            OR a.arti_content LIKE CONCAT('%', #{keyword}, '%'))
+        WHERE a.arti_title LIKE CONCAT('%', #{keyword}, '%')
+           OR a.arti_content LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
     <select id="getArticlesByPublisher" resultType="kr.njs.entity.Articles">
