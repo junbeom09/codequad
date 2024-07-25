@@ -84,6 +84,7 @@ export const searchArticles = async (keyword) => {
     }
 };
 
+/*
 export const getUserSubscribedNews = async (userId) => {
     try {
         const response = await axios.get(`${BASE_URL}/user-subscribed-news/${userId}`);
@@ -118,4 +119,4 @@ export const unsubscribeFromNewsAgency = async (userId, agencyId) => {
         console.error('Error unsubscribing:', error);
         throw error;
     }
-};
+};*/
