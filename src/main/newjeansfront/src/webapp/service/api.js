@@ -84,10 +84,10 @@ export const searchArticles = async (keyword) => {
     }
 };
 
-/*
+
 export const getUserSubscribedNews = async (userId) => {
     try {
-        const response = await axios.get(`${BASE_URL}/user-subscribed-news/${userId}`);
+        const response = await axios.get(`http://localhost:8081/api/user-subscribed-news/${userId}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching subscribed news:', error);
@@ -97,7 +97,7 @@ export const getUserSubscribedNews = async (userId) => {
 
 export const subscribeToNewsAgency = async (userId, agencyId) => {
     try {
-        const response = await axios.post(`${BASE_URL}/subscribe`, {
+        const response = await axios.post(`http://localhost:8081/api/subscribe`, {
             user_id: userId,
             uc_cate: agencyId
         });
@@ -110,7 +110,7 @@ export const subscribeToNewsAgency = async (userId, agencyId) => {
 
 export const unsubscribeFromNewsAgency = async (userId, agencyId) => {
     try {
-        const response = await axios.post(`${BASE_URL}/unsubscribe`, {
+        const response = await axios.post(`http://localhost:8081/api/unsubscribe`, {
             user_id: userId,
             uc_cate: agencyId
         });
@@ -119,4 +119,4 @@ export const unsubscribeFromNewsAgency = async (userId, agencyId) => {
         console.error('Error unsubscribing:', error);
         throw error;
     }
-};*/
+};

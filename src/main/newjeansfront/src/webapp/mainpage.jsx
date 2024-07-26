@@ -71,6 +71,16 @@ const Mainpage = () => {
         navigate(`/search?keyword=${keyword}`);
     };
 
+    const handleSubscribeClick = (e) => {
+        e.preventDefault(); // 기본 네비게이션 동작 방지
+        if (isLogin) {
+            navigate('/subscribe', { state: { userInfo } });
+        } else {
+            alert("구독 기능을 사용하려면 로그인이 필요합니다.");
+            navigate('/login');
+        }
+    };
+
     return (
         <newjinsContext.Provider value={{ cateNews, setCateNews, cateNum, setCateNum }}>
             <div className="container-doc">
@@ -155,8 +165,10 @@ const Mainpage = () => {
                                         <span className="txt_gnb">추천</span></NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/subscribe" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb">구독</span></NavLink>
+                                    <NavLink to="/subscribe" className="link_gnb" activeClassName="active"
+                                             onClick={handleSubscribeClick}>
+                                        <span className="txt_gnb">구독</span>
+                                    </NavLink>
                                 </li>
                                 <div className="sep-line">
                                     <div className="sep-line-br"></div>
