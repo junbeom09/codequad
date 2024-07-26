@@ -11,11 +11,11 @@ import java.util.List;
 @Repository
 public interface SubscriptionRepository {
 
-    Subscription findByUserIdAndUcCate(@Param("userId") String userId, @Param("ucCate") Integer ucCate);
+    Subscription findByUserIdAndUcCate(@Param("userId") String userId, @Param("ucCate") String ucCate);
 
     void insert(Subscription subscription);
 
     void delete(Subscription subscription);
 
-    List<Integer> findByUserId(@Param("userId") String userId);
+    List<String> findByUserId(@Param("userId") String userId);
 }

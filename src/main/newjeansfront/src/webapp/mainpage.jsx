@@ -9,6 +9,7 @@ import Category from "./Components/Category";
 import Recommend from "./Components/Recommend";
 import Subscribe from "./Components/Subscribe";
 import axios from "axios";
+import { getUserSubscribedNews, subscribeToNewsAgency, unsubscribeFromNewsAgency } from './service/api'
 import newjins_row_logo from './assets/img/newjins_row_logo.jpg';
 import Login from "./Components/Login.jsx";
 import SignUp from "./Components/SignUp.jsx";
@@ -25,12 +26,42 @@ const Mainpage = () => {
     const [userInfo, setUserInfo] = useState(null);
     const navigate = useNavigate();
     const searchInputRef = useRef(null);
+    const [subscribedAgencies, setSubscribedAgencies] = useState([]);
+    const pressAgencies = [
+        { id: 1, name: "디지털타임스", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_07101201.png" },
+        { id: 2, name: "데일리안", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_04100158.png" },
+        { id: 3, name: "스포츠서울", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_10100101.png" },
+        { id: 4, name: "전자신문", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_07100501.png" },
+        { id: 5, name: "매일신문", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01500601.png" },
+        { id: 6, name: "파이낸셜뉴스", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_02100501.png" },
+        { id: 7, name: "머니투데이", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_02100201.png" },
+        { id: 8, name: "헤럴드경제", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_02100701.png" },
+        { id: 9, name: "경향신문", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100101.png" },
+        { id: 10, name: "동아일보", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100401.png" },
+        { id: 11, name: "중앙일보", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100901.png" },
+        { id: 12, name: "세계일보", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100701.png" },
+        { id: 13, name: "한국일보", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01101101.png" },
+        { id: 14, name: "더팩트", logo: "https://img.tf.co.kr/index/2022/09/13/1663028192.gif" },
+        { id: 15, name: "노컷뉴스", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_04100058.png" },
+        { id: 16, name: "비즈워치", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_04101808.png" },
+        { id: 17, name: "국민일보", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100201.png" },
+        { id: 18, name: "디지털데일리", logo: "https://www.ddaily.co.kr/assets/images/common/logo.png" },
+        { id: 19, name: "지디넷코리아", logo: "https://zdnet.co.kr/images/zdnet_logo.png" },
+        { id: 20, name: "연합뉴스TV", logo: "https://www.yonhapnewstv.co.kr/asset/img/common/img_logo_yhntv_navy.png" },
+        { id: 21, name: "조선비즈", logo: "./img/chosunBiz.png" },
+        { id: 22, name: "한국경제TV", logo: "./img/koreaEconomic.png" },
+        { id: 23, name: "머니S", logo: "https://menu.moneys.co.kr/moneys/assets/20240717163719/images/logo_moneys.svg" },
+        { id: 24, name: "아이뉴스24", logo: "./img/eyeNews.png" }
+    ];
+
 
     useEffect(() => {
         const user = JSON.parse(sessionStorage.getItem("userInfo"));
         if (user) {
+            console.log("User info loaded from session storage:", user);
             setIsLogin(true);
             setUserInfo(user);
+            fetchSubscribedAgencies(user.user_id);
         }
     }, []);
 
@@ -78,6 +109,41 @@ const Mainpage = () => {
         } else {
             alert("구독 기능을 사용하려면 로그인이 필요합니다.");
             navigate('/login');
+        }
+    };
+    const handleSubscriptionToggle = async (agencyId) => {
+        if (!isLogin) {
+            alert("구독 기능을 사용하려면 로그인이 필요합니다.");
+            navigate('/login');
+            return;
+        }
+
+        try {
+            console.log("Toggling subscription for agencyId:", agencyId);
+            console.log("User info:", userInfo);  // 추가된 로그
+
+            if (subscribedAgencies.includes(agencyId)) {
+                console.log("Unsubscribing from:", agencyId);
+                await unsubscribeFromNewsAgency(userInfo.user_id, agencyId);
+                setSubscribedAgencies(prev => prev.filter(id => id !== agencyId));
+            } else {
+                console.log("Subscribing to:", agencyId);
+                await subscribeToNewsAgency(userInfo.user_id, agencyId);
+                setSubscribedAgencies(prev => [...prev, agencyId]);
+            }
+        } catch (error) {
+            console.error('Error toggling subscription:', error);
+        }
+    };
+
+
+
+    const fetchSubscribedAgencies = async (userId) => {
+        try {
+            const subscriptions = await getUserSubscribedNews(userId);
+            setSubscribedAgencies(subscriptions.map(sub => sub.publisherId));
+        } catch (error) {
+            console.error('Error fetching subscriptions:', error);
         }
     };
 
@@ -233,202 +299,26 @@ const Mainpage = () => {
                                     {/* // <!-- 더보기 버튼 클릭하면 나타나는 내용 --> */}
                                     {/* // <!-- 언론사 리스트 시작 --> */}
                                     {showPressBox && (
-                                        <div id="modal-press2" class="press-set-layer">
-                                            <div class="press-list-wrap">
+                                        <div id="modal-press2" className="press-set-layer">
+                                            <div className="press-list-wrap">
                                                 <button type="button" onClick={closePressBox} className="btn-close">X</button>
-                                                <ul class="press-list">
-                                                    <li>
-                                                        <a href="" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_07101201.png" alt="디지털타임스" />
-                                                        </a>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_04100158.png" alt="데일리안" />
-                                                        </a>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_10100101.png" alt="스포츠서울" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_07100501.png" alt="전자신문" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01500601.png" alt="매일신문" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_02100501.png" alt="파이낸셜뉴스" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_02100201.png" alt="머니투데이" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_02100701.png" alt="헤럴드경제" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100101.png" alt="경향신문" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100401.png" alt="동아일보" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100901.png" alt="중앙일보" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100701.png" alt="세계일보" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01101101.png" alt="한국일보" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://img.tf.co.kr/index/2022/09/13/1663028192.gif" alt="더팩트" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_04100058.png" alt="노컷뉴스" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_04101808.png" alt="비즈워치" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_01100201.png" alt="국민일보" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/company" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.ddaily.co.kr/assets/images/common/logo.png" style={{ width: "110px", height: "20px" }} alt="디지털데일리" />
-                                                        </Link>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="" class="providerClick2">
-                                                            <img loading="lazy" src="https://zdnet.co.kr/images/zdnet_logo.png?ver=20220830" style={{ width: "110px", height: "20px" }} alt="지디넷코리아" />
-                                                        </a>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="" class="providerClick2">
-                                                            <img loading="lazy" src="https://www.yonhapnewstv.co.kr/asset/img/common/img_logo_yhntv_navy.png" style={{ width: "110px", height: "20px" }} alt="연합뉴스tv" />
-                                                        </a>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="" class="providerClick2">
-                                                            <img loading="lazy" src="./img/chosunBiz.png" alt="조선비즈" />
-                                                        </a>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="" class="providerClick2">
-                                                            <img loading="lazy" src="./img/koreaEconomic.png" alt="한국경제tv" />
-                                                        </a>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="" class="providerClick2">
-                                                            <img loading="lazy" src="https://menu.moneys.co.kr/moneys/assets/20240717163719/images/logo_moneys.svg" alt="머니s" />
-                                                        </a>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="" class="providerClick2">
-                                                            <img loading="lazy" src="./img/eyeNews.png" alt="아이뉴스24" />
-                                                        </a>
-                                                        <button type="button" class="btn-press-sel">
-                                                            <span class="sr-only">선택</span>
-                                                        </button>
-                                                    </li>
+                                                <ul className="press-list">
+                                                    {/* 언론사 목록을 map으로 렌더링 */}
+                                                    {pressAgencies.map(agency => (
+                                                        <li key={agency.id}>
+                                                            <a href="#" className="providerClick2">
+                                                                <img loading="lazy" src={agency.logo} alt={agency.name} />
+                                                            </a>
+                                                            <label className="checkbox-label">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    checked={subscribedAgencies.includes(agency.id)}
+                                                                    onChange={() => handleSubscriptionToggle(agency.id)}
+                                                                />
+                                                                <span className="sr-only">선택</span>
+                                                            </label>
+                                                        </li>
+                                                    ))}
                                                 </ul>
                                             </div>
                                         </div>

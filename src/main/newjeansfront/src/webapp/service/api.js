@@ -97,9 +97,10 @@ export const getUserSubscribedNews = async (userId) => {
 
 export const subscribeToNewsAgency = async (userId, agencyId) => {
     try {
+        console.log("Subscribing with userId:", userId, "and agencyId:", agencyId);  // 추가된 로그
         const response = await axios.post(`http://localhost:8081/api/subscribe`, {
             user_id: userId,
-            uc_cate: agencyId
+            uc_publisher: agencyId
         });
         return response.data;
     } catch (error) {
@@ -110,9 +111,10 @@ export const subscribeToNewsAgency = async (userId, agencyId) => {
 
 export const unsubscribeFromNewsAgency = async (userId, agencyId) => {
     try {
+        console.log("Unsubscribing with userId:", userId, "and agencyId:", agencyId);  // 추가된 로그
         const response = await axios.post(`http://localhost:8081/api/unsubscribe`, {
             user_id: userId,
-            uc_cate: agencyId
+            uc_publisher: agencyId
         });
         return response.data;
     } catch (error) {

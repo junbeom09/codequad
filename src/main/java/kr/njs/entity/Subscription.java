@@ -15,7 +15,7 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sub_idx;
 
-    private Integer uc_cate;
+    private String uc_publisher;
 
     private String user_id;
 }

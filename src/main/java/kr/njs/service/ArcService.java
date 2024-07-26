@@ -36,11 +36,11 @@ public class ArcService {
     }
 
     public List<Articles> getNewsByNewsAgencies(List<Integer> newsAgencyIds) {
-        return newsAgencyIds.stream()
-                .flatMap(id -> arcRepository.findByPublisher(String.valueOf(id)).stream())
+        List<String> publishers = newsAgencyIds.stream()
+                .map(String::valueOf)
                 .collect(Collectors.toList());
+        return arcRepository.findByPublisher(publishers);
     }
-
 
 
 }
