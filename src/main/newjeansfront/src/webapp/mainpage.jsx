@@ -9,7 +9,6 @@ import Category from "./Components/Category";
 import Recommend from "./Components/Recommend";
 import Subscribe from "./Components/Subscribe";
 import axios from "axios";
-import { getUserSubscribedNews, subscribeToNewsAgency, unsubscribeFromNewsAgency } from './service/api'
 import newjins_row_logo from './assets/img/newjins_row_logo.jpg';
 import Login from "./Components/Login.jsx";
 import SignUp from "./Components/SignUp.jsx";
@@ -54,16 +53,42 @@ const Mainpage = () => {
         { id: 24, name: "아이뉴스24", logo: "./img/eyeNews.png" }
     ];
 
-
     useEffect(() => {
-        const user = JSON.parse(sessionStorage.getItem("userInfo"));
-        if (user) {
-            console.log("User info loaded from session storage:", user);
-            setIsLogin(true);
-            setUserInfo(user);
-            fetchSubscribedAgencies(user.user_id);
-        }
+        checkLoginStatus();
+
+        // 세션 스토리지 변경 이벤트 리스너 추가
+        window.addEventListener('storage', checkLoginStatus);
+
+        return () => {
+            window.removeEventListener('storage', checkLoginStatus);
+        };
     }, []);
+
+    const checkLoginStatus = () => {
+        const userInfoString = sessionStorage.getItem("userInfo");
+        console.log("User info from session storage:", userInfoString);
+        if (userInfoString) {
+            const user = JSON.parse(userInfoString);
+            if (user && user.us_id) {
+                setIsLogin(true);
+                setUserInfo(user);
+                fetchSubscribedAgencies(user.us_id);
+            } else {
+                console.error("Invalid user info in session storage");
+                handleLogout();
+            }
+        } else {
+            console.log("No user info found in session storage");
+            handleLogout();
+        }
+    };
+
+    const handleLogout = () => {
+        sessionStorage.removeItem("userInfo");
+        setIsLogin(false);
+        setUserInfo(null);
+        setSubscribedAgencies([]);
+    };
 
     const getCate = async (e) => {
         try {
@@ -71,7 +96,6 @@ const Mainpage = () => {
             const response = await fetchArticlesByCategory(cate);
             setCateNews(response.data);
             setCateNum(cate);
-
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
         }
@@ -102,48 +126,45 @@ const Mainpage = () => {
         navigate(`/search?keyword=${keyword}`);
     };
 
-    const handleSubscribeClick = (e) => {
-        e.preventDefault(); // 기본 네비게이션 동작 방지
-        if (isLogin) {
-            navigate('/subscribe', { state: { userInfo } });
-        } else {
-            alert("구독 기능을 사용하려면 로그인이 필요합니다.");
-            navigate('/login');
-        }
-    };
-    const handleSubscriptionToggle = async (agencyId) => {
-        if (!isLogin) {
-            alert("구독 기능을 사용하려면 로그인이 필요합니다.");
+    const handleSubscriptionToggle = async (agencyName) => {
+        if (!userInfo || !userInfo.us_id) {
+            alert("로그인이 필요합니다.");
             navigate('/login');
             return;
         }
 
         try {
-            console.log("Toggling subscription for agencyId:", agencyId);
-            console.log("User info:", userInfo);  // 추가된 로그
+            const isCurrentlySubscribed = subscribedAgencies.includes(agencyName);
+            const endpoint = isCurrentlySubscribed ? '/api/unsubscribe' : '/api/subscribe';
 
-            if (subscribedAgencies.includes(agencyId)) {
-                console.log("Unsubscribing from:", agencyId);
-                await unsubscribeFromNewsAgency(userInfo.user_id, agencyId);
-                setSubscribedAgencies(prev => prev.filter(id => id !== agencyId));
-            } else {
-                console.log("Subscribing to:", agencyId);
-                await subscribeToNewsAgency(userInfo.user_id, agencyId);
-                setSubscribedAgencies(prev => [...prev, agencyId]);
+            const response = await axios.post(`http://localhost:8081${endpoint}`, {
+                user_id: userInfo.us_id,
+                uc_publisher: agencyName
+            });
+
+            if (response.status === 200) {
+                setSubscribedAgencies(prev =>
+                    isCurrentlySubscribed ? prev.filter(name => name !== agencyName) : [...prev, agencyName]
+                );
+                alert(isCurrentlySubscribed ? '구독이 취소되었습니다.' : '구독되었습니다.');
             }
         } catch (error) {
-            console.error('Error toggling subscription:', error);
+            console.error('Error toggling subscription:', error.response?.data || error.message);
+            alert('구독 상태 변경 중 오류가 발생했습니다.');
         }
     };
 
-
-
     const fetchSubscribedAgencies = async (userId) => {
+        if (!userId) {
+            console.error("UserId is undefined");
+            return;
+        }
         try {
-            const subscriptions = await getUserSubscribedNews(userId);
-            setSubscribedAgencies(subscriptions.map(sub => sub.publisherId));
+            const response = await axios.get(`http://localhost:8081/api/user-subscribed-news/${userId}`);
+            console.log("Subscriptions response:", response.data);
+            setSubscribedAgencies(response.data);
         } catch (error) {
-            console.error('Error fetching subscriptions:', error);
+            console.error('Error fetching subscriptions:', error.response?.data || error.message);
         }
     };
 
@@ -181,19 +202,19 @@ const Mainpage = () => {
                                 </div>
                             </div>
                             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                {!isLogin ? (
+                                {isLogin ? (
                                     <div className="login-area">
-                                        <Link to="/login">
-                                            <button type="button" className="btn-login">
-                                                로그인
+                                        <Link to="/logout">
+                                            <button type="button" className="btn-login" onClick={handleLogout}>
+                                                로그아웃
                                             </button>
                                         </Link>
                                     </div>
                                 ) : (
                                     <div className="login-area">
-                                        <Link to="/logout">
+                                        <Link to="/login">
                                             <button type="button" className="btn-login">
-                                                로그아웃
+                                                로그인
                                             </button>
                                         </Link>
                                     </div>
@@ -231,8 +252,7 @@ const Mainpage = () => {
                                         <span className="txt_gnb">추천</span></NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/subscribe" className="link_gnb" activeClassName="active"
-                                             onClick={handleSubscribeClick}>
+                                    <NavLink to="/subscribe" className="link_gnb" activeClassName="active">
                                         <span className="txt_gnb">구독</span>
                                     </NavLink>
                                 </li>
@@ -303,7 +323,6 @@ const Mainpage = () => {
                                             <div className="press-list-wrap">
                                                 <button type="button" onClick={closePressBox} className="btn-close">X</button>
                                                 <ul className="press-list">
-                                                    {/* 언론사 목록을 map으로 렌더링 */}
                                                     {pressAgencies.map(agency => (
                                                         <li key={agency.id}>
                                                             <a href="#" className="providerClick2">
@@ -312,10 +331,10 @@ const Mainpage = () => {
                                                             <label className="checkbox-label">
                                                                 <input
                                                                     type="checkbox"
-                                                                    checked={subscribedAgencies.includes(agency.id)}
-                                                                    onChange={() => handleSubscriptionToggle(agency.id)}
+                                                                    checked={subscribedAgencies.includes(agency.name)}
+                                                                    onChange={() => handleSubscriptionToggle(agency.name)}
                                                                 />
-                                                                <span className="sr-only">선택</span>
+                                                                <span className="sr-only">구독</span>
                                                             </label>
                                                         </li>
                                                     ))}

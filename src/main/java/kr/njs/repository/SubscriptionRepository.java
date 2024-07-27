@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface SubscriptionRepository {
 
-    Subscription findByUserIdAndUcCate(@Param("userId") String userId, @Param("ucCate") String ucCate);
+    Subscription findByUserIdAndUcPublisher(@Param("userId") String userId, @Param("ucPublisher") String ucPublisher);
 
     void insert(Subscription subscription);
 

@@ -3,21 +3,21 @@
 
 <mapper namespace="kr.njs.repository.SubscriptionRepository">
 
-    <select id="findByUserIdAndUcCate" parameterType="map" resultType="kr.njs.entity.Subscription">
-        SELECT * FROM Subscriptions WHERE user_id = #{userId} AND uc_publisher = #{ucPublisher}
+    <select id="findByUserIdAndUcPublisher" parameterType="map" resultType="kr.njs.entity.Subscription">
+        SELECT * FROM subscriptions WHERE user_id = #{userId} AND uc_publisher = #{ucPublisher}
     </select>
 
     <insert id="insert" parameterType="kr.njs.entity.Subscription">
-        INSERT INTO Subscriptions (uc_publisher, user_id)
+        INSERT INTO subscriptions (uc_publisher, user_id)
         VALUES (#{uc_publisher}, #{user_id})
     </insert>
 
     <delete id="delete" parameterType="kr.njs.entity.Subscription">
-        DELETE FROM Subscriptions WHERE sub_idx = #{sub_idx}
+        DELETE FROM subscriptions WHERE sub_idx = #{sub_idx}
     </delete>
 
     <select id="findByUserId" parameterType="string" resultType="string">
-        SELECT uc_publisher FROM Subscriptions WHERE user_id = #{userId}
+        SELECT uc_publisher FROM subscriptions WHERE user_id = #{userId}
     </select>
 
 </mapper>

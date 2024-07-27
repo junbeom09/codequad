@@ -72,7 +72,6 @@ export const getArticlesByPublisher = async (publisher) => {
     }
 };
 
-// 카테고리 내 키워드 검색
 export const searchArticles = async (keyword) => {
     try {
         const response = await axios.get(`http://localhost:8081/api/keywordsearch`, {
@@ -84,41 +83,17 @@ export const searchArticles = async (keyword) => {
     }
 };
 
-
 export const getUserSubscribedNews = async (userId) => {
-    try {
-        const response = await axios.get(`http://localhost:8081/api/user-subscribed-news/${userId}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching subscribed news:', error);
-        throw error;
-    }
+    const response = await axios.get(`${API_BASE_URL}/user-subscribed-news/${userId}`);
+    return response.data;
 };
 
-export const subscribeToNewsAgency = async (userId, agencyId) => {
-    try {
-        console.log("Subscribing with userId:", userId, "and agencyId:", agencyId);  // 추가된 로그
-        const response = await axios.post(`http://localhost:8081/api/subscribe`, {
-            user_id: userId,
-            uc_publisher: agencyId
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error subscribing:', error);
-        throw error;
-    }
+export const subscribeToNewsAgency = async (userId, agencyName) => {
+    const response = await axios.post(`${API_BASE_URL}/subscribe`, { user_id: userId, uc_publisher: agencyName });
+    return response.data;
 };
 
-export const unsubscribeFromNewsAgency = async (userId, agencyId) => {
-    try {
-        console.log("Unsubscribing with userId:", userId, "and agencyId:", agencyId);  // 추가된 로그
-        const response = await axios.post(`http://localhost:8081/api/unsubscribe`, {
-            user_id: userId,
-            uc_publisher: agencyId
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error unsubscribing:', error);
-        throw error;
-    }
+export const unsubscribeFromNewsAgency = async (userId, agencyName) => {
+    const response = await axios.post(`${API_BASE_URL}/unsubscribe`, { user_id: userId, uc_publisher: agencyName });
+    return response.data;
 };

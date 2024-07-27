@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "../assets/css/mainpage.css";
 import "../assets/css/header.css";
-import "../assets/css/footer.css"
-import "../assets/css/recommend.css"
+import "../assets/css/footer.css";
+import "../assets/css/recommend.css";
 import { getUserSubscribedNews, subscribeToNewsAgency, unsubscribeFromNewsAgency } from '../service/api';
 
 const Subscribe = () => {
@@ -53,7 +53,6 @@ const Subscribe = () => {
                                 <h2 className="title">내가 구독한 뉴스</h2>
                             </header>
                             <div className="opinion_filter_area _series_filter">
-                                {/* 필터 영역 유지 */}
                             </div>
                             <ul className="opinion_serialization_list _persist_wrap _subscribe_list _more_series">
                                 {subscribedNews.map((newsGroup, index) => (
@@ -61,14 +60,14 @@ const Subscribe = () => {
                                         <div className="item_header">
                                             <a href="" className="link">
                                                 <div className="image">
-                                                    <img src={newsGroup.publisherLogo} width="22" height="22" alt={newsGroup.publisherName}/>
+                                                    <img src={newsGroup.publisherLogo} width="22" height="22" alt={newsGroup.publisherName} />
                                                 </div>
                                                 <strong className="header_name">{newsGroup.publisherName}</strong>
                                             </a>
                                             <div className="opinion_subscribe_wrap _my_feed_wrapper" data-use-follow-layer="1">
                                                 <a href="" className="opinion_subscribe _my_feed_btn" onClick={(e) => {
                                                     e.preventDefault();
-                                                    handleUnsubscribe(newsGroup.publisherId);
+                                                    handleUnsubscribe(newsGroup.publisherName);
                                                 }}>
                                                     <span className="opinion_subscribe_text _txt">구독 취소</span>
                                                 </a>
@@ -98,7 +97,6 @@ const Subscribe = () => {
                                                         )}
                                                     </a>
                                                 </li>
-
                                             ))}
                                         </ul>
                                     </li>

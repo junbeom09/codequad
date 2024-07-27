@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../assets/css/login.css";
 import google from "../assets/img/google-icon.png";
 import axios from "axios";
+
+axios.defaults.withCredentials = true; // Axios 요청 시 쿠키를 포함
 
 const Login = () => {
     const [userId, setUserId] = useState('');
@@ -14,16 +16,16 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const result = await axios.post('http://localhost:8081/api/userLogin', { userId, password });
+            const result = await axios.post('http://localhost:8081/api/userLogin', { userId, password }, { withCredentials: true });
             if (result.data.message === "로그인 성공") {
                 sessionStorage.setItem("userInfo", JSON.stringify(result.data.user));
+                console.log("Stored user info:", result.data.user);
                 setIsSuccess(true);
                 setMessage("로그인 성공! 잠시 후 메인 페이지로 이동합니다.");
                 setTimeout(() => {
-
                     navigate('/');
                     window.location.reload();
-                }, 1000); // 2초 후 메인 페이지로 이동
+                }, 1000); // 1초 후 메인 페이지로 이동
             } else {
                 setIsSuccess(false);
                 setMessage("로그인 실패, 잘못된 아이디 또는 비밀번호입니다.");
@@ -31,8 +33,31 @@ const Login = () => {
         } catch (error) {
             setIsSuccess(false);
             setMessage("로그인 실패: " + (error.response?.data || error.message));
+            console.error("Login error:", error);
         }
     };
+
+    const checkUserSession = async () => {
+        try {
+            const response = await axios.get('http://localhost:8081/api/getUserSession', { withCredentials: true });
+            if (response.status === 200) {
+                sessionStorage.setItem("userInfo", JSON.stringify(response.data));
+                console.log("Session user info:", response.data);
+                setIsSuccess(true);
+            } else {
+                setIsSuccess(false);
+                setMessage("세션 정보가 없습니다.");
+            }
+        } catch (error) {
+            setIsSuccess(false);
+            setMessage("세션 정보 가져오기 실패: " + (error.response?.data || error.message));
+            console.error("Session fetch error:", error);
+        }
+    };
+
+    useEffect(() => {
+        checkUserSession();
+    }, []);
 
     return (
         <div className="root">

@@ -18,6 +18,8 @@ public class SubscriptionController {
 
     @PostMapping("/subscribe")
     public ResponseEntity<?> subscribeToNewsAgency(@RequestBody Subscription subscription) {
+        // 데이터 점검
+        System.out.println("Received subscription data: " + subscription);
         if (subscription.getUser_id() == null || subscription.getUc_publisher() == null) {
             return ResponseEntity.badRequest().body("UserId and ucPublisher must not be null");
         }

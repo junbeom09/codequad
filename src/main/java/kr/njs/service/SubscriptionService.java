@@ -18,7 +18,7 @@ public class SubscriptionService {
             throw new IllegalArgumentException("UserId and newsAgencyId must not be null");
         }
         System.out.println("Service - Subscribing user: " + userId + " to publisher: " + newsAgencyId);
-        if (subscriptionRepository.findByUserIdAndUcCate(userId, newsAgencyId) != null) {
+        if (subscriptionRepository.findByUserIdAndUcPublisher(userId, newsAgencyId) != null) {
             throw new RuntimeException("Already subscribed to this news agency");
         }
 
@@ -33,7 +33,7 @@ public class SubscriptionService {
             throw new IllegalArgumentException("UserId and newsAgencyId must not be null");
         }
         System.out.println("Service - Unsubscribing user: " + userId + " from publisher: " + newsAgencyId);
-        Subscription subscription = subscriptionRepository.findByUserIdAndUcCate(userId, newsAgencyId);
+        Subscription subscription = subscriptionRepository.findByUserIdAndUcPublisher(userId, newsAgencyId);
         if (subscription == null) {
             throw new RuntimeException("Subscription not found");
         }
