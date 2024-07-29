@@ -27,7 +27,7 @@ const Mainpage = () => {
     const [userInfo, setUserInfo] = useState(null);
     const navigate = useNavigate();
     const searchInputRef = useRef(null);
-    const [subscribedAgencies, setSubscribedAgencies] = useState([]);
+    const [subscribedAgencies, setSubscribedAgencies] = useState(JSON.parse(sessionStorage.getItem('subscribedAgencies')) || []);
     const pressAgencies = [
         { id: 1, name: "디지털타임스", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_07101201.png" },
         { id: 2, name: "데일리안", logo: "https://www.bigkinds.or.kr/assets/v3/img/provider/nspIcon_04100158.png" },
@@ -165,9 +165,11 @@ const Mainpage = () => {
             });
 
             if (response.status === 200) {
-                setSubscribedAgencies(prev =>
-                    isCurrentlySubscribed ? prev.filter(name => name !== agencyName) : [...prev, agencyName]
-                );
+                setSubscribedAgencies(prev => {
+                    const updatedAgencies = isCurrentlySubscribed ? prev.filter(name => name !== agencyName) : [...prev, agencyName];
+                    sessionStorage.setItem('subscribedAgencies', JSON.stringify(updatedAgencies));
+                    return updatedAgencies;
+                });
                 alert(isCurrentlySubscribed ? '구독이 취소되었습니다.' : '구독되었습니다.');
             }
         } catch (error) {
@@ -184,7 +186,9 @@ const Mainpage = () => {
         try {
             const response = await axios.get(`http://localhost:8081/api/user-subscribed-news/${userId}`);
             console.log("Subscriptions response:", response.data);
-            setSubscribedAgencies(response.data);
+            const agencies = response.data.map(item => item.publisherName);
+            setSubscribedAgencies(agencies);
+            sessionStorage.setItem('subscribedAgencies', JSON.stringify(agencies));
         } catch (error) {
             console.error('Error fetching subscriptions:', error.response?.data || error.message);
         }
