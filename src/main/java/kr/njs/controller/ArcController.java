@@ -1,7 +1,7 @@
 package kr.njs.controller;
 
 import kr.njs.entity.Articles;
-
+import kr.njs.request.PublisherRequest;
 import kr.njs.service.ArcService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class ArcController {
     @Autowired
     private final ArcService arcservice;
 
-    @GetMapping("/newsArticles") // 뉴스 리스트 가져오는 기능
+    @GetMapping("/newsArticles")
     public ResponseEntity<List<Articles>> Arclist() {
         try {
             List<Articles> articles = arcservice.Arclist();
@@ -29,14 +29,21 @@ public class ArcController {
         }
     }
 
-    @GetMapping("/category/{categoryId}") // 카테고리별 검색 기능
+    @GetMapping("/category/{categoryId}")
     public List<Articles> getArticlesByCategory(@PathVariable int categoryId) {
         return arcservice.getArticlesByCategory(categoryId);
     }
 
-    @GetMapping("/publisher/{publisher}") // 언론사 별 검색 기능
-    public List<Articles> getArticlesByPublisher(@PathVariable String publisher) {
-        return arcservice.getArticlesByPublisher(publisher);
+    @PostMapping("/publisher")
+    public ResponseEntity<List<Articles>> getArticlesByPublisher(@RequestBody PublisherRequest request) {
+        String publisher = request.getPublisher();
+        System.out.println("Received publisher: " + publisher); // 디버깅 로그 추가
+        try {
+            List<Articles> articles = arcservice.getArticlesByPublisher(publisher);
+            return ResponseEntity.ok(articles);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @GetMapping("/keywordsearch")
@@ -49,4 +56,3 @@ public class ArcController {
         }
     }
 }
-

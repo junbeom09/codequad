@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="kr.njs.repository.SubscriptionRepository">
 
-    <select id="findByUserIdAndUcCate" resultType="kr.njs.entity.Subscription">
-        SELECT * FROM Subscriptions
-        WHERE user_id = #{userId} AND uc_cate = #{ucCate}
+    <select id="findByUserIdAndUcPublisher" parameterType="map" resultType="kr.njs.entity.Subscription">
+        SELECT * FROM subscriptions WHERE user_id = #{userId} AND uc_publisher = #{ucPublisher}
     </select>
 
     <insert id="insert" parameterType="kr.njs.entity.Subscription">
-        INSERT INTO Subscriptions (user_id, uc_cate)
-        VALUES (#{user_id}, #{uc_cate})
+        INSERT INTO subscriptions (uc_publisher, user_id)
+        VALUES (#{uc_publisher}, #{user_id})
     </insert>
 
     <delete id="delete" parameterType="kr.njs.entity.Subscription">
-        DELETE FROM Subscriptions
-        WHERE user_id = #{user_id} AND uc_cate = #{uc_cate}
+        DELETE FROM subscriptions WHERE sub_idx = #{sub_idx}
     </delete>
 
-    <select id="findByUserId" resultType="java.lang.Integer">
-        SELECT uc_cate FROM Subscriptions
-        WHERE user_id = #{userId}
+    <select id="findByUserId" parameterType="string" resultType="string">
+        SELECT uc_publisher FROM subscriptions WHERE user_id = #{userId}
+    </select>
+
+    <select id="findByPublishers" parameterType="list" resultType="kr.njs.entity.Articles">
+        SELECT * FROM Articles WHERE publisher IN
+        <foreach item="publisher" collection="publishers" open="(" separator="," close=")">
+            #{publisher}
+        </foreach>
     </select>
 
 </mapper>

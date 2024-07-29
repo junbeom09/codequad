@@ -1,5 +1,6 @@
 package kr.njs.repository;
 
+import kr.njs.entity.Articles;
 import kr.njs.entity.Subscription;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -11,11 +12,13 @@ import java.util.List;
 @Repository
 public interface SubscriptionRepository {
 
-    Subscription findByUserIdAndUcCate(@Param("userId") String userId, @Param("ucCate") Integer ucCate);
+    Subscription findByUserIdAndUcPublisher(@Param("userId") String userId, @Param("ucPublisher") String ucPublisher);
 
     void insert(Subscription subscription);
 
     void delete(Subscription subscription);
 
-    List<Integer> findByUserId(@Param("userId") String userId);
+    List<String> findByUserId(@Param("userId") String userId);
+
+    List<Articles> findByPublishers(@Param("publishers") List<String> publishers);
 }
