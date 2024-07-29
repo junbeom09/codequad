@@ -34,11 +34,9 @@ public class ArcController {
         return arcservice.getArticlesByCategory(categoryId);
     }
 
-    @PostMapping("/publisher")
-    public ResponseEntity<List<Articles>> getArticlesByPublisher(@RequestBody PublisherRequest request) {
-        System.out.println("Received JSON request: " + request); // 디버깅 로그 추가
-        String publisher = request.getPublisher();
-        System.out.println("Received publisher: " + publisher); // 디버깅 로그 추가
+    @GetMapping("/publisher/{company}")
+    public ResponseEntity<List<Articles>> getArticlesByPublisher(@PathVariable String company) {
+        String publisher = company;
         try {
             List<Articles> articles = arcservice.getArticlesByPublisher(publisher);
             return ResponseEntity.ok(articles);
