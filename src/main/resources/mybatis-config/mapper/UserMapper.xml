@@ -12,7 +12,7 @@
 
     <update id="userUpdate">
         UPDATE Users
-        SET user_name = #{us_name}, user_email = #{us_email}, user_password = #{us_password}, user_birthdate = #{us_birthdate}
+        SET user_name = #{us_name}, user_email = #{us_email}, user_password = SHA2(#{us_password},256), user_birthdate = #{us_birthdate}
         WHERE user_id = #{us_id}
     </update>
 

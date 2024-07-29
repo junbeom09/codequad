@@ -169,7 +169,7 @@ const Mainpage = () => {
     };
 
     return (
-        <newjinsContext.Provider value={{ cateNews, setCateNews, cateNum, setCateNum }}>
+        <newjinsContext.Provider value={{ cateNews, setCateNews, cateNum, setCateNum, userInfo, setUserInfo, subscribedAgencies, setSubscribedAgencies }}>
             <div className="container-doc">
                 <header id="header" className="header">
                     <div className="hd-top">
