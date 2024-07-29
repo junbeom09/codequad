@@ -50,7 +50,6 @@ const Login = () => {
             }
         } catch (error) {
             setIsSuccess(false);
-            setMessage("세션 정보 가져오기 실패: " + (error.response?.data || error.message));
             console.error("Session fetch error:", error);
         }
     };
@@ -102,19 +101,7 @@ const Login = () => {
                                 </div>
                             </form>
                         </div>
-                        <div className="line"></div>
-                        <div className="media-options">
-                            <a href="#" className="field kakao" aria-label="Login with Kakao account">
-                                <i className="fa-solid fa-comment kakao-icon"></i>
-                                <span>카카오 계정으로 로그인</span>
-                            </a>
-                        </div>
-                        <div className="media-options">
-                            <a href="#" className="field google" aria-label="Login with Google account">
-                                <img src={google} className="google-icon" alt="Google Icon" />
-                                <span>구글 계정으로 로그인</span>
-                            </a>
-                        </div>
+
                     </div>
                 </div>
             </section>

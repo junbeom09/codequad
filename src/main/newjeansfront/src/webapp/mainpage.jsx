@@ -340,7 +340,7 @@ const Mainpage = () => {
                                         tabIndex="0"
                                         style={{cursor: 'pointer'}}
                                     >
-                    더보기 >
+                    구독 더보기 >
                 </span>
                                 </a>
                                     {showPressBox && (

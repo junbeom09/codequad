@@ -59,7 +59,7 @@ const Category = () => {
                                         <div className="item_column">
                                             <a href="" className="wrap_thumb">
                                                 <img
-                                                    src="https://img1.daumcdn.net/thumb/S224x140ht.u/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fnews%2F202407%2F11%2FNEWS1%2F20240711143351513wksq.jpg&scode=media2"
+                                                    src={item.arti_pic}
                                                     className="thumb_g" />
                                             </a>
                                             <div className="cont_thumb">
