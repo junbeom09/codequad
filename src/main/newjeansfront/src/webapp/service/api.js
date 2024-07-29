@@ -59,5 +59,5 @@ const fetchArticlesByPublisher = async (publisher) => {
     }
 };
 
-// 예시 호출
+// 예시 호출1
 fetchArticlesByPublisher('데일리안');
