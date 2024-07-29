@@ -28,7 +28,7 @@
            OR a.arti_content LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
-    <select id="getArticlesByPublisher" resultType="kr.njs.entity.Articles">
+    <select id="findByPublisher" resultType="kr.njs.entity.Articles">
         SELECT * FROM Articles WHERE publisher = #{publisher}
     </select>
 

@@ -12,27 +12,61 @@ const Subscribe = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+    const fetchArticlesForPublisher = async (publisher) => {
+        if (!publisher) {
+            console.error('Publisher is undefined');
+            return null;
+        }
+        try {
+            let publisherName;
+            if (typeof publisher === 'object') {
+                publisherName = publisher.name || publisher.publisherName || Object.values(publisher)[0];
+            } else {
+                publisherName = publisher;
+            }
+
+            if (!publisherName) {
+                console.error('Publisher name is undefined', publisher);
+                return null;
+            }
+
+            const articles = await getArticlesByPublisher(publisherName);
+            return {
+                publisherName: publisherName,
+                articles: articles.slice(0, 5) // 최대 5개의 기사만 표시
+            };
+        } catch (error) {
+            console.error(`Error fetching articles for publisher:`, publisher, error);
+            return {
+                publisherName: typeof publisher === 'object' ?
+                    (publisher.name || publisher.publisherName || '알 수 없는 출판사') :
+                    publisher || '알 수 없는 출판사',
+                articles: [] // 오류 발생 시 빈 배열 반환
+            };
+        }
+    };
+
     const fetchSubscribedNewsWithArticles = useCallback(async (userId) => {
         try {
             setLoading(true);
+            setError(null);
             const subscribedPublishers = await getUserSubscribedNews(userId);
             console.log("구독한 출판사:", subscribedPublishers);
 
+            if (!Array.isArray(subscribedPublishers)) {
+                throw new Error('Subscribed publishers is not an array');
+            }
+
             const newsWithArticles = await Promise.all(
-                subscribedPublishers.map(async (publisher) => {
-                    const articles = await getArticlesByPublisher(publisher);
-                    return {
-                        publisherName: publisher,
-                        articles: articles
-                    };
-                })
+                subscribedPublishers.map(fetchArticlesForPublisher)
             );
 
-            console.log("가져온 구독 뉴스:", newsWithArticles);
-            setSubscribedNews(newsWithArticles);
+            const validNewsWithArticles = newsWithArticles.filter(news => news !== null);
+            console.log("가져온 구독 뉴스:", validNewsWithArticles);
+            setSubscribedNews(validNewsWithArticles);
         } catch (error) {
             console.error('구독 뉴스 가져오기 실패:', error);
-            setError("뉴스를 불러오는데 실패했습니다: " + error.message);
+            setError("뉴스를 불러오는데 실패했습니다. 잠시 후 다시 시도해주세요.");
         } finally {
             setLoading(false);
         }
@@ -47,8 +81,22 @@ const Subscribe = () => {
         }
     }, [navigate, fetchSubscribedNewsWithArticles]);
 
+    const handleRetry = () => {
+        const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+        if (userInfo && userInfo.us_id) {
+            fetchSubscribedNewsWithArticles(userInfo.us_id);
+        } else {
+            navigate('/login');
+        }
+    };
+
     if (loading) return <div>로딩 중...</div>;
-    if (error) return <div className="error-message">{error}</div>;
+    if (error) return (
+        <div className="error-message">
+            {error}
+            <button onClick={handleRetry}>다시 시도</button>
+        </div>
+    );
 
     return (
         <div>
@@ -67,20 +115,22 @@ const Subscribe = () => {
                                     {subscribedNews.map((newsGroup, index) => (
                                         <li key={index} className="opinion_serialization_item">
                                             <div className="item_header">
-                                                <a href="#" className="link">
-                                                    <div className="image">
-                                                        <img src={newsGroup.publisherLogo} width="22" height="22" alt={newsGroup.publisherName} />
-                                                    </div>
-                                                    <strong className="header_name">{newsGroup.publisherName}</strong>
-                                                </a>
-                                                <div className="opinion_subscribe_wrap _my_feed_wrapper">
-                                                    {newsGroup.articles.map((article, articleIndex) => (
+                                                <strong className="header_name">{newsGroup.publisherName}</strong>
+                                            </div>
+                                            <div className="opinion_subscribe_wrap _my_feed_wrapper">
+                                                {newsGroup.articles.length > 0 ? (
+                                                    newsGroup.articles.map((article, articleIndex) => (
                                                         <div key={articleIndex} className="article">
-                                                            <h3>{article.title}</h3>
-                                                            <p>{article.content}</p>
+                                                            <h3>{article.arti_title || '제목 없음'}</h3>
+                                                            <p>{(article.arti_content && article.arti_content.substring(0, 100)) || '내용 없음'}...</p>
                                                         </div>
-                                                    ))}
-                                                </div>
+                                                    ))
+                                                ) : (
+                                                    <p>이 출판사의 기사를 불러오지 못했습니다.</p>
+                                                )}
+                                                {newsGroup.articles.length === 5 && (
+                                                    <button className="more-articles-btn">더 보기</button>
+                                                )}
                                             </div>
                                         </li>
                                     ))}

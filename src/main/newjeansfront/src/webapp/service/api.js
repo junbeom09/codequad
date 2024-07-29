@@ -14,33 +14,14 @@ export const searchArticles = async (keyword) => {
     }
 };
 
-// 출판사별 기사 가져오기
-export const getArticlesByPublisher = async (publisher) => {
+// 출판사 이름으로 기사 가져오기 (POST 요청)
+export const getArticlesByPublisher = async (publisherName) => {
     try {
-        const data = { publisher: publisher }; // JSON 객체로 변환
-        const response = await axios.post(
-            'http://localhost:8081/api/publisher',
-            data,
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-        );
+        const response = await axios.post(`${API_BASE_URL}/publisher`, { publisher: publisherName });
         return response.data;
     } catch (error) {
-        if (error.response) {
-            console.error('Error fetching articles by publisher:', {
-                data: error.response.data,
-                status: error.response.status,
-                headers: error.response.headers
-            });
-        } else if (error.request) {
-            console.error('No response received:', error.request);
-        } else {
-            console.error('Error setting up the request:', error.message);
-        }
-        throw error;
+        console.error(`Error fetching articles for publisher ${publisherName}:`, error);
+        return []; // 오류 발생 시 빈 배열 반환
     }
 };
 
@@ -67,3 +48,16 @@ export const getUserSubscribedNews = async (userId) => {
         throw error;
     }
 };
+
+// 예시 호출
+const fetchArticlesByPublisher = async (publisher) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/publisher`, { publisher });
+        console.log(response.data);
+    } catch (error) {
+        console.error(`Error fetching articles for publisher ${publisher}:`, error);
+    }
+};
+
+// 예시 호출
+fetchArticlesByPublisher('데일리안');
