@@ -1,46 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getUserSubscribedNews, getArticlesByPublisher } from '../service/api';
 import "../assets/css/mainpage.css";
 import "../assets/css/header.css";
 import "../assets/css/footer.css";
 import "../assets/css/recommend.css";
-import { getUserSubscribedNews, subscribeToNewsAgency, unsubscribeFromNewsAgency } from '../service/api';
 
 const Subscribe = () => {
     const [subscribedNews, setSubscribedNews] = useState([]);
-    const userId = JSON.parse(sessionStorage.getItem("userInfo"))?.user_id || "";
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+
+    const fetchSubscribedNewsWithArticles = useCallback(async (userId) => {
+        try {
+            setLoading(true);
+            const subscribedPublishers = await getUserSubscribedNews(userId);
+            console.log("구독한 출판사:", subscribedPublishers);
+
+            const newsWithArticles = await Promise.all(
+                subscribedPublishers.map(async (publisher) => {
+                    const articles = await getArticlesByPublisher(publisher);
+                    return {
+                        publisherName: publisher,
+                        articles: articles
+                    };
+                })
+            );
+
+            console.log("가져온 구독 뉴스:", newsWithArticles);
+            setSubscribedNews(newsWithArticles);
+        } catch (error) {
+            console.error('구독 뉴스 가져오기 실패:', error);
+            setError("뉴스를 불러오는데 실패했습니다: " + error.message);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
     useEffect(() => {
-        if (userId) {
-            fetchSubscribedNews();
+        const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+        if (!userInfo || !userInfo.us_id) {
+            navigate('/login');
+        } else {
+            fetchSubscribedNewsWithArticles(userInfo.us_id);
         }
-    }, [userId]);
+    }, [navigate, fetchSubscribedNewsWithArticles]);
 
-    const fetchSubscribedNews = async () => {
-        try {
-            const news = await getUserSubscribedNews(userId);
-            setSubscribedNews(news);
-        } catch (error) {
-            console.error('Failed to fetch subscribed news:', error);
-        }
-    };
-
-    const handleSubscribe = async (agencyId) => {
-        try {
-            await subscribeToNewsAgency(userId, agencyId);
-            fetchSubscribedNews();
-        } catch (error) {
-            console.error('Failed to subscribe:', error);
-        }
-    };
-
-    const handleUnsubscribe = async (agencyId) => {
-        try {
-            await unsubscribeFromNewsAgency(userId, agencyId);
-            fetchSubscribedNews();
-        } catch (error) {
-            console.error('Failed to unsubscribe:', error);
-        }
-    };
+    if (loading) return <div>로딩 중...</div>;
+    if (error) return <div className="error-message">{error}</div>;
 
     return (
         <div>
@@ -52,56 +60,32 @@ const Subscribe = () => {
                             <header className="opinion_header">
                                 <h2 className="title">내가 구독한 뉴스</h2>
                             </header>
-                            <div className="opinion_filter_area _series_filter">
-                            </div>
-                            <ul className="opinion_serialization_list _persist_wrap _subscribe_list _more_series">
-                                {subscribedNews.map((newsGroup, index) => (
-                                    <li key={index} className="opinion_serialization_item">
-                                        <div className="item_header">
-                                            <a href="" className="link">
-                                                <div className="image">
-                                                    <img src={newsGroup.publisherLogo} width="22" height="22" alt={newsGroup.publisherName} />
-                                                </div>
-                                                <strong className="header_name">{newsGroup.publisherName}</strong>
-                                            </a>
-                                            <div className="opinion_subscribe_wrap _my_feed_wrapper" data-use-follow-layer="1">
-                                                <a href="" className="opinion_subscribe _my_feed_btn" onClick={(e) => {
-                                                    e.preventDefault();
-                                                    handleUnsubscribe(newsGroup.publisherName);
-                                                }}>
-                                                    <span className="opinion_subscribe_text _txt">구독 취소</span>
+                            {subscribedNews.length === 0 ? (
+                                <p>구독한 뉴스가 없습니다.</p>
+                            ) : (
+                                <ul className="opinion_serialization_list _persist_wrap _subscribe_list _more_series">
+                                    {subscribedNews.map((newsGroup, index) => (
+                                        <li key={index} className="opinion_serialization_item">
+                                            <div className="item_header">
+                                                <a href="#" className="link">
+                                                    <div className="image">
+                                                        <img src={newsGroup.publisherLogo} width="22" height="22" alt={newsGroup.publisherName} />
+                                                    </div>
+                                                    <strong className="header_name">{newsGroup.publisherName}</strong>
                                                 </a>
+                                                <div className="opinion_subscribe_wrap _my_feed_wrapper">
+                                                    {newsGroup.articles.map((article, articleIndex) => (
+                                                        <div key={articleIndex} className="article">
+                                                            <h3>{article.title}</h3>
+                                                            <p>{article.content}</p>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <ul className="article_list">
-                                            {newsGroup.articles.map((article, articleIndex) => (
-                                                <li key={articleIndex} className={`article_item ${articleIndex === 0 ? 'as_type_main' : 'as_type_sub'}`}>
-                                                    <a href={article.link} className="link">
-                                                        {articleIndex === 0 ? (
-                                                            <>
-                                                                <div className="content">
-                                                                    <p className="article_text">{article.title}</p>
-                                                                    <div className="sub_info">
-                                                                        <span className="press_name">{newsGroup.publisherName}</span>
-                                                                        <span className="timestamp">{article.publishDate}</span>
-                                                                    </div>
-                                                                </div>
-                                                                {article.imageUrl && (
-                                                                    <div className="image">
-                                                                        <img className="article-img" loading="lazy" width="64" height="64" src={article.imageUrl} alt={article.title} onError={(e) => e.target.style.display = 'none'} />
-                                                                    </div>
-                                                                )}
-                                                            </>
-                                                        ) : (
-                                                            <p className="article_text">{article.title}</p>
-                                                        )}
-                                                    </a>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </li>
-                                ))}
-                            </ul>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </section>
                 </div>

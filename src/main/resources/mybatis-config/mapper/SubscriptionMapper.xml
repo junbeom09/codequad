@@ -20,4 +20,11 @@
         SELECT uc_publisher FROM subscriptions WHERE user_id = #{userId}
     </select>
 
+    <select id="findByPublishers" parameterType="list" resultType="kr.njs.entity.Articles">
+        SELECT * FROM Articles WHERE publisher IN
+        <foreach item="publisher" collection="publishers" open="(" separator="," close=")">
+            #{publisher}
+        </foreach>
+    </select>
+
 </mapper>

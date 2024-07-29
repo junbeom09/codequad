@@ -1,11 +1,16 @@
 package kr.njs.service;
 
+import kr.njs.entity.Articles;
 import kr.njs.entity.Subscription;
 import kr.njs.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,5 +51,25 @@ public class SubscriptionService {
         }
         System.out.println("Service - Getting subscriptions for user: " + userId);
         return subscriptionRepository.findByUserId(userId);
+    }
+
+    public List<Map<String, Object>> getUserSubscribedNewsWithArticles(String userId) {
+        List<String> publishers = subscriptionRepository.findByUserId(userId);
+        if (publishers.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<Articles> articles = subscriptionRepository.findByPublishers(publishers);
+        Map<String, List<Articles>> articlesByPublisher = articles.stream()
+                .collect(Collectors.groupingBy(Articles::getPublisher));
+
+        return publishers.stream()
+                .map(publisher -> {
+                    Map<String, Object> publisherMap = new HashMap<>();
+                    publisherMap.put("publisherName", publisher);
+                    publisherMap.put("articles", articlesByPublisher.getOrDefault(publisher, Collections.emptyList()));
+                    return publisherMap;
+                })
+                .collect(Collectors.toList());
     }
 }

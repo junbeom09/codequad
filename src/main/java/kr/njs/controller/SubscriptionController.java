@@ -3,10 +3,12 @@ package kr.njs.controller;
 import kr.njs.entity.Subscription;
 import kr.njs.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -48,14 +50,17 @@ public class SubscriptionController {
 
     @GetMapping("/user-subscribed-news/{user_id}")
     public ResponseEntity<?> getUserSubscribedNews(@PathVariable String user_id) {
-        if (user_id == null) {
-            return ResponseEntity.badRequest().body("UserId must not be null");
+        if (user_id == null || user_id.isEmpty()) {
+            return ResponseEntity.badRequest().body("UserId must not be null or empty");
         }
         try {
-            List<String> subscribedNewsAgencies = subscriptionService.getUserSubscriptions(user_id);
-            return ResponseEntity.ok(subscribedNewsAgencies);
+            List<Map<String, Object>> subscribedNews = subscriptionService.getUserSubscribedNewsWithArticles(user_id);
+            if (subscribedNews.isEmpty()) {
+                return ResponseEntity.ok().body("No subscribed news found for this user");
+            }
+            return ResponseEntity.ok(subscribedNews);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to get subscribed news: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get subscribed news: " + e.getMessage());
         }
     }
 }

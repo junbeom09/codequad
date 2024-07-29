@@ -253,8 +253,7 @@ const Mainpage = () => {
                                 </li>
                                 <li>
                                     <NavLink to="/subscribe" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb">구독</span>
-                                    </NavLink>
+                                        <span className="txt_gnb">구독</span></NavLink>
                                 </li>
                                 <div className="sep-line">
                                     <div className="sep-line-br"></div>
@@ -316,8 +315,6 @@ const Mainpage = () => {
                     더보기 >
                 </span>
                                 </a>
-                                    {/* // <!-- 더보기 버튼 클릭하면 나타나는 내용 --> */}
-                                    {/* // <!-- 언론사 리스트 시작 --> */}
                                     {showPressBox && (
                                         <div id="modal-press2" className="press-set-layer">
                                             <div className="press-list-wrap">

@@ -8,7 +8,7 @@
     <select id="Arclist" resultType="kr.njs.entity.Articles">
         SELECT * FROM Articles
         ORDER BY arti_created DESC
-        LIMIT 200
+            LIMIT 200
     </select>
 
     <select id="findByCategory" resultType="kr.njs.entity.Articles">
@@ -17,7 +17,7 @@
                  JOIN Categories c ON a.arti_cate = c.category_id
         WHERE a.arti_cate = #{categoryId}
         ORDER BY arti_created DESC
-        LIMIT 150
+            LIMIT 150
     </select>
 
     <select id="searchByKeyword" resultType="kr.njs.entity.Articles">
@@ -32,7 +32,7 @@
         SELECT * FROM Articles WHERE publisher = #{publisher}
     </select>
 
-    <select id="findByPublisher" parameterType="list" resultType="kr.njs.entity.Articles">
+    <select id="findByPublishers" parameterType="list" resultType="kr.njs.entity.Articles">
         SELECT * FROM Articles WHERE publisher IN
         <foreach item="publisher" index="index" collection="publishers" open="(" separator="," close=")">
             #{publisher}

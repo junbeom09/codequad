@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-//
+
 @Repository
 @Mapper
 public interface ArcRepository {
@@ -15,9 +15,7 @@ public interface ArcRepository {
 
     List<Articles> findByCategory(@Param("categoryId") int categoryId);
 
-    List<Articles> findByPublisher(@Param("publisher")String publisher);
+    List<Articles> findByPublisher(@Param("publisher") String publisher);
 
     List<Articles> searchByKeyword(@Param("keyword") String keyword);
-
-    List<Articles> findByPublisher(@Param("publishers") List<String> publishers);
 }
