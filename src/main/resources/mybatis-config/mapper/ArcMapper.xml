@@ -29,7 +29,7 @@
     </select>
 
     <select id="findByPublisher" resultType="kr.njs.entity.Articles">
-        SELECT * FROM Articles WHERE publisher = #{publisher}
+        SELECT * FROM Articles WHERE publisher = #{publisher} ORDER BY arti_created DESC
     </select>
 
     <select id="findByPublishers" parameterType="list" resultType="kr.njs.entity.Articles">
