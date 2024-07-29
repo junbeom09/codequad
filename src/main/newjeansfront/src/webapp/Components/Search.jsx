@@ -27,9 +27,10 @@ const Search = () => {
         <div>
             <main>
                 <section className="search-results" id="search-results">
-                    <div className="left-column">
+
                         {searchResults.length > 0 ? (
                             searchResults.map((article) => (
+                                <div className="left-column">
                                 <div className="box-container" key={article.arti_id}>
                                     <div className="article-container">
                                         <div className="content">
@@ -41,11 +42,12 @@ const Search = () => {
                                         <img src={article.arti_pic} alt="기사 이미지" />
                                     </div>
                                 </div>
+                                </div>
                             ))
                         ) : (
                             <p>검색 결과가 없습니다.</p>
                         )}
-                    </div>
+
                 </section>
             </main>
         </div>

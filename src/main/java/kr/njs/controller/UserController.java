@@ -30,10 +30,10 @@ public class UserController {
     }
 
     @PutMapping("/userUpdate/{us_id}") //회원정보 수정 기능
-    public String userUpdate(@PathVariable String us_id, @RequestBody User user) {
+    public ResponseEntity<?> userUpdate(@PathVariable String us_id, @RequestBody User user) {
         user.setUs_id(us_id);
         userService.userUpdate(user);
-        return "put 요청 : " + " id : " + user.getUs_id() + " 사용자비밀번호 : " + user.getUs_password();
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/userLogin") // 로그인 기능
@@ -42,6 +42,7 @@ public class UserController {
         String pw = credentials.get("password");
         User loginUser = userService.login(id, pw);
         if (loginUser != null) {
+            loginUser.setUs_password(pw);
             session.setAttribute("user", loginUser); // 사용자 정보를 세션에 저장
             return ResponseEntity.ok(Map.of("message", "로그인 성공", "user", loginUser));
         } else {

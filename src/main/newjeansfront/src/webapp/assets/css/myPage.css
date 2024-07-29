@@ -61,7 +61,7 @@ h1 {
 }
 
 .subscriptions div {
-    width: 48%;
+    width: 100%;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
@@ -140,4 +140,101 @@ img.google-icon {
 
 .btn-edit-profile:hover {
     background-color: #0078e0;
+}
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 50%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info-group {
+    margin-bottom: 15px;
+}
+
+.info-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.info-group p,
+.info-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.info-group input {
+    box-sizing: border-box;
+}
+
+.subscriptions-title {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.subscriptions {
+    margin-bottom: 20px;
+}
+
+.subscriptions h2 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.subscriptions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.subscriptions li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subscriptions button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.subscriptions button:hover {
+    background-color: #ff1a1a;
+}
+
+.btn-edit-profile {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-edit-profile:hover {
+    background-color: #0056b3;
 }
