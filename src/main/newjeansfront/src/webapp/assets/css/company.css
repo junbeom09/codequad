@@ -1248,3 +1248,20 @@ img, a img, fieldset {
     height: 20px;
     width: 20px;
 }
+
+.load-more-btn {
+    display: block;
+    margin: 20px auto; /* 가운데 정렬을 위한 설정 */
+    padding: 10px 20px;
+    background-color: #007bff; /* 파란색 배경 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+.load-more-btn:hover {
+    background-color: #0056b3; /* 호버 시 더 어두운 파란색 */
+}
