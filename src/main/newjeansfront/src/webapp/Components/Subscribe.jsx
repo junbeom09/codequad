@@ -120,16 +120,17 @@ const Subscribe = () => {
                                             <div className="opinion_subscribe_wrap _my_feed_wrapper">
                                                 {newsGroup.articles.length > 0 ? (
                                                     newsGroup.articles.map((article, articleIndex) => (
-                                                        <div key={articleIndex} className="article">
-                                                            <h3>{article.arti_title || '제목 없음'}</h3>
-                                                            <p>{(article.arti_content && article.arti_content.substring(0, 100)) || '내용 없음'}...</p>
+                                                        <div key={articleIndex} className="article"><a
+                                                            href={article.arti_url}>
+                                                            <h3 style={{marginBottom:"10px"}}>{article.arti_title || '제목 없음'}</h3>
+                                                            <img style={{float: "right", marginLeft:"15px"}} src={article.arti_pic}/>
+                                                        </a>
+                                                            <p>{(article.arti_content) || '내용 없음'}</p>
+                                                            <br></br>
                                                         </div>
                                                     ))
                                                 ) : (
-                                                    <p>이 출판사의 기사를 불러오지 못했습니다.</p>
-                                                )}
-                                                {newsGroup.articles.length === 5 && (
-                                                    <button className="more-articles-btn">더 보기</button>
+                                                    <p>이 언론사의 기사를 불러오지 못했습니다.</p>
                                                 )}
                                             </div>
                                         </li>
