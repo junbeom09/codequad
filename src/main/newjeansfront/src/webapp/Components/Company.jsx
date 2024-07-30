@@ -83,7 +83,7 @@ const Company = () => {
                                 <ul className="press_edit_news_list">
                                     {visibleArticles.map(item => (
                                         <li key={item.arti_id} className="press_edit_news_item as_thumb">
-                                            <a href={item.arti_url} className="press_edit_news_link _es_pc_link">
+                                            <a href={item.arti_url} target="_blank" className="press_edit_news_link _es_pc_link">
                                                 <span className="press_edit_news_thumb">
                                                     <img src={item.arti_pic} alt="" />
                                                 </span>

@@ -41,20 +41,20 @@ const Home = () => {
                             <div className="box_g box_news_issue" data-tiara-layer="headline">
                                 <h3 className="screen_out">오늘의 이슈</h3>
                                 <ul className="list_newsissue">
-                                    {/*// <!-- 15개의 li 요소 반복-->*/}
+                                    {/*// <!--li 요소 반복-->*/}
                                     {newsList.map(item=>(<li key={item.arti_id}>
                                         <div className="item_issue" data-tiara-layer="headline1"><a
-                                            className="wrap_thumb" data-tiara-layer="article_main" href=""><img
+                                            className="wrap_thumb" target="_blank" href={item.arti_url}><img
                                             className="thumb_g" src={item.arti_pic}/></a>
                                             <div className="cont_thumb"><span className="info_thumb"><span
                                                 className="logo_cp"><img className="thumb_g" src=""
                                                                          alt={item.publisher}/></span></span><strong
                                                 className="tit_g"><a
-                                                className="link_txt" className="link_txt_title" data-tiara-layer="article_main" href={item.arti_url}>{item.arti_title}</a></strong><span
+                                                className="link_txt" className="link_txt_title" data-tiara-layer="article_main" target="_blank" href={item.arti_url}>{item.arti_title}</a></strong><a href={item.arti_url} target="_blank"> <span
                                                 style={{
                                                     fontSize: "x-small",
                                                     color: "rgb(121, 119, 119)"
-                                                }}>{item.arti_content}</span>
+                                                }}>{item.arti_content}</span></a>
                                             </div>
                                         </div>
                                     </li>))}

@@ -57,14 +57,14 @@ const Category = () => {
                                 {cateNews.slice(0, 6).map(item => (
                                     <li key={item.arti_id}>
                                         <div className="item_column">
-                                            <a href="" className="wrap_thumb">
+                                            <a href={item.arti_url} target="_blank" className="wrap_thumb">
                                                 <img
                                                     src={item.arti_pic}
                                                     className="thumb_g" />
                                             </a>
                                             <div className="cont_thumb">
                                                 <strong className="tit_g">
-                                                    <a href={item.arti_url} className="link_txt">
+                                                    <a href={item.arti_url} target="_blank" className="link_txt">
                                                         {item.arti_title}
                                                     </a>
                                                 </strong>
@@ -85,7 +85,7 @@ const Category = () => {
                             <ul className="list_newsmajor">
                                 {cateNews.slice(6, visibleNews).map(item => (
                                     <li key={item.arti_id}>
-                                        <a href={item.arti_url} className="link_txt">
+                                        <a href={item.arti_url} target="_blank" className="link_txt">
                                             <strong className="tit_g">
                                                 <span className="info_cp">{item.publisher}</span>
                                                 {item.arti_title}
