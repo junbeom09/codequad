@@ -641,9 +641,9 @@ img, fieldset {
     margin-top: 0;
     border-radius: 10px;
 }
-.box_photonews {
-    min-height: 700px;
-}
+/*.box_photonews {*/
+/*    min-height: 700px;*/
+/*}*/
 .btn-login a {
     color: #fff;
 }

@@ -47,8 +47,7 @@ const Home = () => {
                                             className="wrap_thumb" target="_blank" href={item.arti_url}><img
                                             className="thumb_g" src={item.arti_pic}/></a>
                                             <div className="cont_thumb"><span className="info_thumb"><span
-                                                className="logo_cp"><img className="thumb_g" src=""
-                                                                         alt={item.publisher}/></span></span><strong
+                                                className="logo_cp">{item.publisher}</span></span><strong
                                                 className="tit_g"><a
                                                 className="link_txt" className="link_txt_title" data-tiara-layer="article_main" target="_blank" href={item.arti_url}>{item.arti_title}</a></strong><a href={item.arti_url} target="_blank"> <span
                                                 style={{
@@ -233,211 +232,17 @@ const Home = () => {
                                 </div>
                             </div>
                             {/*// <!-- 언론사 구독 -->*/}
-                            <div className="box_side box_photonews" data-tiara-layer="photonews">
-                                <h3 className="tit_box">관심있는 언론사를 더 구독해보세요.</h3>
-                                <ul className="list_photonews">
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="640">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/640/2020/05/06/logo_640_56_20200506111106.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">코리아중앙데일리</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="662">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/662/2024/03/06/logo_662_56_20240306140536.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">농민신문</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="346">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/346/2023/02/24/logo_346_56_20230224143254.jpg"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">헬스조선</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="296">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/296/2021/08/31/logo_296_56_20210831152430.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">코메디닷컴</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="584">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/584/2018/09/20/logo_584_56_20180920154720.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">동아사이언스</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="007">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/007/2020/04/02/logo_007_56_20200402163602.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">일다</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="310">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/310/2020/08/11/logo_310_56_20200811154942.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">여성신문</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="607">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/607/2018/10/02/logo_607_56_20181002184602.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">뉴스타파</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="044">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/044/2018/10/02/logo_044_56_20181002183002.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">코리아헤럴드</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false"
-                                           data-office_id="127">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/127/2020/04/02/logo_127_56_20200402162102.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">기자협회보</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/009/2018/07/20/logo_009_56_20180720194820.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">매일경제</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/018/2018/07/18/logo_018_56_20180718152418.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">이데일리</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/277/2018/07/18/logo_277_56_20180718153218.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">아시아경제</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/008/2018/09/13/logo_008_56_20180913140213.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">머니투데이</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/014/2020/12/23/logo_014_56_20201223183322.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">파이낸셜뉴스</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/648/2023/02/13/logo_648_56_20230213170647.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">비즈워치</div>
-                                        </a>
-                                    </li>
-                                    <li className="cjs_age_item">
-                                        <a href="" className="cjs_link_age _item" role="checkbox"
-                                           aria-checked="false">
-                                            <div className="cjs_age_mw">
-                                                <img loading="lazy"
-                                                     src="https://mimgnews.pstatic.net/image/upload/office_logo/021/2022/08/04/logo_021_56_20220804125306.png"
-                                                     width="54" height="54" onError="showNoImage(this)"/>
-                                            </div>
-                                            <div className="cjs_age_name">문화일보</div>
-                                        </a>
-                                    </li>
-                                </ul>
+                            <div className="box_side box_photonews" style={{height:"500px"}} data-tiara-layer="photonews">
+                                <h3 style={{textAlign:"center"}} className="tit_box">카카오톡 채널을 추가해,<br></br> 다영한 뉴스를 만나보세요.</h3>
+                                <a href="https://pf.kakao.com/_xdxhGyG" target="_blank">
+                                    <img style={{width: "300px", maxHeight: "1050px", marginBottom:"15px"}}
+                                         src="https://k.kakaocdn.net/dn/blvGat/btsIQo4xz5F/2XOjDpoL1k9pKunqjj6yG1/img_xl.jpg"/>
+                                    <p style={{textAlign:"center", color:"#007BFF"}} ><b>사진을 클릭하면 채널을 추가할 수 있습니다.</b></p>
+                                </a>
                             </div>
                             {/*// <!-- 광고 -->*/}
                             <div className="box_side box_ad">
-                                <ins className="kakao_ad_area">
+                            <ins className="kakao_ad_area">
                                     <div data-ad-creative-wrap="outer"
                                          style={{position: "absolute", maxHeight: "inherit", inset: "0px"}}>
                                         광고
