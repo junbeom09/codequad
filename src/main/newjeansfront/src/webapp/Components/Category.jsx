@@ -59,7 +59,7 @@ const Category = () => {
                                         <div className="item_column">
                                             <a href="" className="wrap_thumb">
                                                 <img
-                                                    src="https://img1.daumcdn.net/thumb/S224x140ht.u/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fnews%2F202407%2F11%2FNEWS1%2F20240711143351513wksq.jpg&scode=media2"
+                                                    src={item.arti_pic}
                                                     className="thumb_g" />
                                             </a>
                                             <div className="cont_thumb">
@@ -71,6 +71,7 @@ const Category = () => {
                                                 <span className="info_thumb">
                                                     <span className="txt_info">{item.publisher}</span>
                                                 </span>
+
                                             </div>
                                         </div>
                                     </li>
@@ -84,12 +85,14 @@ const Category = () => {
                             <ul className="list_newsmajor">
                                 {cateNews.slice(6, visibleNews).map(item => (
                                     <li key={item.arti_id}>
-                                        <strong className="tit_g">
-                                            <span className="info_cp">{item.publisher}</span>
-                                            <a href={item.arti_url} className="link_txt">
+                                        <a href={item.arti_url} className="link_txt">
+                                            <strong className="tit_g">
+                                                <span className="info_cp">{item.publisher}</span>
                                                 {item.arti_title}
-                                            </a>
-                                        </strong>
+                                            </strong>
+                                            <div style={{color:"gray"}}>{item.arti_content}</div>
+                                        </a>
+                                        <br/>
                                     </li>
                                 ))}
                             </ul>
