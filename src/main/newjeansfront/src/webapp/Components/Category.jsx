@@ -4,6 +4,7 @@ import "../assets/css/header.css";
 import "../assets/css/footer.css";
 import "../assets/css/category.css";
 import { newjinsContext } from "../context/newjinsContext";
+import ppl from "../assets/img/img.png";
 
 const Category = () => {
     const { cateNews, setCateNews, cateNum, setCateNum } = useContext(newjinsContext);
@@ -161,9 +162,12 @@ const Category = () => {
                                      textDecoration: "none", minWidth: "250px", minHeight: "250px"
                                  }}>
                                 <div data-ad-creative-wrap="outer"
-                                     style={{ position: "absolute", maxHeight: "inherit", inset: "0px" }}>
+                                     style={{position: "absolute", maxHeight: "inherit", inset: "0px"}}>
                                     {/* 광고 코드 */}
                                     광고
+                                    <a href="https://purmil.co.kr/" target="_blank">
+                                        <img style={{width: "290px", height: "250px"}} src={ppl}/>
+                                    </a>
                                 </div>
                             </ins>
                         </div>

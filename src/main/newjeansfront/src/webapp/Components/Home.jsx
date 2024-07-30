@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import "../assets/css/mainpage.css";
 import axios from "axios";
-
+import ppl from "../assets/img/img.png";
 
 const Home = () => {
     const [newsList,setNewsList] = useState([]);
@@ -242,12 +242,15 @@ const Home = () => {
                             </div>
                             {/*// <!-- 광고 -->*/}
                             <div className="box_side box_ad">
-                            <ins className="kakao_ad_area">
+                            <div style={{width:"290px", height:"250px"}} className="kakao_ad_area">
                                     <div data-ad-creative-wrap="outer"
-                                         style={{position: "absolute", maxHeight: "inherit", inset: "0px"}}>
+                                         style={{position: "absolute", inset: "0px"}}>
                                         광고
+                                        <a href="https://purmil.co.kr/" target="_blank">
+                                            <img style={{width:"290px", height:"250px"}} src={ppl}/>
+                                        </a>
                                     </div>
-                                </ins>
+                                </div>
                             </div>
                         </div>
                     </div>

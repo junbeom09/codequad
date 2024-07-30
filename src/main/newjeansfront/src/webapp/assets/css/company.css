@@ -199,7 +199,7 @@ img, fieldset {
     bottom: 1px;
     left: 1px;
     content: '';
-    border-radius: 50%;
+    border-radius: 15%;
     background-color: #fff;
 }
 .hd_ci_image img {
@@ -207,8 +207,8 @@ img, fieldset {
     display: block;
 }
 .hd_ci_image img {
-    border-radius: 50%;
-    vertical-align: top;
+    /*border-radius: 25%;*/
+    vertical-align: center;
     width: 100%;
     height: auto;
 }

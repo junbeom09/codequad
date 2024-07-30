@@ -121,7 +121,7 @@ const Subscribe = () => {
                                                 {newsGroup.articles.length > 0 ? (
                                                     newsGroup.articles.map((article, articleIndex) => (
                                                         <div key={articleIndex} className="article"><a
-                                                            href={article.arti_url}>
+                                                            href={article.arti_url} target="_blank">
                                                             <h3 style={{marginBottom:"10px"}}>{article.arti_title || '제목 없음'}</h3>
                                                             <img style={{float: "right", marginLeft:"15px"}} src={article.arti_pic}/>
                                                         </a>

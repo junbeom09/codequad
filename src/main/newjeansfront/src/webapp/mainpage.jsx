@@ -225,7 +225,7 @@ const Mainpage = () => {
                                     />
                                     <div>
                                         <button type="button" className="btn-search" onClick={handleSearch}>
-                                            <i className="fa-solid fa-magnifying-glass"></i>
+                                            <img style={{width:"25px"}} src="https://cdn-icons-png.flaticon.com/512/107/107122.png"/>
                                         </button>
                                     </div>
                                 </div>
