@@ -46,6 +46,21 @@ public class ArcController {
         }
     }
 
+    @PostMapping("/publisher")
+    public ResponseEntity<List<Articles>> getArticlesByPublisher(@RequestBody PublisherRequest request) {
+        System.out.println("Received JSON request: " + request); // 디버깅 로그 추가
+        String publisher = request.getPublisher();
+        System.out.println("Received publisher: " + publisher); // 디버깅 로그 추가
+        try {
+            List<Articles> articles = arcservice.getArticlesByPublisher(publisher);
+            return ResponseEntity.ok(articles);
+        } catch (Exception e) {
+            e.printStackTrace(); // 디버깅 로그 추가
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
     @GetMapping("/keywordsearch")
     public ResponseEntity<List<Articles>> searchArticles(@RequestParam String keyword) {
         try {

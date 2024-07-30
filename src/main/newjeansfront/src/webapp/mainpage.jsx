@@ -281,10 +281,6 @@ const Mainpage = () => {
                                         <span className="txt_gnb">홈</span></NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/recommend" className="link_gnb" activeClassName="active">
-                                        <span className="txt_gnb">추천</span></NavLink>
-                                </li>
-                                <li>
                                     <NavLink to="/subscribe" className="link_gnb" activeClassName="active">
                                         <span className="txt_gnb">구독</span></NavLink>
                                 </li>
@@ -347,7 +343,7 @@ const Mainpage = () => {
                                         tabIndex="0"
                                         style={{cursor: 'pointer'}}
                                     >
-                    더보기 >
+                    구독 더보기 >
                 </span>
                                 </a>
                                     {showPressBox && (
