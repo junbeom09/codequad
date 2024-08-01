@@ -30,7 +30,7 @@
 | 벡엔드     | ![Node.js](https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white) ![Spring](https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white) ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white) |
 | 서버       | ![Spring Boot](https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)                           |
 | IDE        | ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-%230071C5?style=for-the-badge&logo=intellijidea&logoColor=white)            |
-| 모델링      | ![KoBERT](https://img.shields.io/badge/KoBERT-%23FF5733?style=for-the-badge&logo=python&logoColor=white) / ![DBSCAN](https://img.shields.io/badge/DBSCAN-%2333C1FF?style=for-the-badge&logo=python&logoColor=white) / ![KoBART](https://img.shields.io/badge/KoBART-%2375FF33?style=for-the-badge&logo=python&logoColor=white)    |
+| 모델링      | ![KoBERT](https://img.shields.io/badge/KoBERT-%23FF5733?style=for-the-badge&logo=python&logoColor=white) ![DBSCAN](https://img.shields.io/badge/DBSCAN-%2333C1FF?style=for-the-badge&logo=python&logoColor=white) ![KoBART](https://img.shields.io/badge/KoBART-%2375FF33?style=for-the-badge&logo=python&logoColor=white)    |
 | 협업도구    | ![GitHub](https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white)                                     |
 
 
