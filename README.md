@@ -50,10 +50,12 @@
 ## 👨‍👩‍👧‍👦 팀원 소개
 
 | **조준범**        | **윤명상**        | **이소연**        | **유현수**        |
+|-------------------|-------------------|-------------------|-------------------|
 | PM                | DB 설계 및 구축   | Front-end        | Front-end         |
 | Data Modeling     | Back-end, Data Modeling | Back-end       |                   |
 | Back-end          |                   |                   |                   |
 | [GitHub](https://github.com/junbeom09) | [GitHub](https://github.com/Med1tation) | [GitHub](https://github.com/ssoy1) | [GitHub](https://github.com/EasyPeasy0) |
+
 
 
 
