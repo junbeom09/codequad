@@ -33,7 +33,9 @@
 | 모델링      | ![KoBERT](https://img.shields.io/badge/KoBERT-%23FF5733?style=for-the-badge&logo=python&logoColor=white) ![DBSCAN](https://img.shields.io/badge/DBSCAN-%2333C1FF?style=for-the-badge&logo=python&logoColor=white) ![KoBART](https://img.shields.io/badge/KoBART-%2375FF33?style=for-the-badge&logo=python&logoColor=white)    |
 | 협업도구    | ![GitHub](https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white)                                     |
 
-
+## 💻 시스템 아키텍처(구조)
+### SW유스케이스
+   
 
 
 
