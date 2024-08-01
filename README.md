@@ -54,7 +54,7 @@
 조준범 / 윤명상 / 이소연 / 유현수
 
 ## 관련 자료
-- [기획 문서 및 발표 자료가 포함된 Google Drive 폴더](https://drive.google.com/drive/folders/1q44AQBK_FeTlDoVbJE38ONfbDm9C4KkT)
+- [기획 문서 및 발표 자료](https://drive.google.com/drive/folders/1q44AQBK_FeTlDoVbJE38ONfbDm9C4KkT)
 
 
 
