@@ -34,7 +34,8 @@
 | 협업도구    | ![GitHub](https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white)                                     |
 
 ## 💻 시스템 아키텍처(구조)
-### SW유스케이스
+### 자동화 다이어그램
+
    
 
 
