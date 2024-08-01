@@ -47,11 +47,14 @@
 
 
 
+## 👨‍👩‍👧‍👦 팀원 소개
 
-## 팀원소개
+| ![조준범](사진_URL) | ![윤명상](사진_URL) | ![이소연](사진_URL) | ![유현수](사진_URL) |
+|-------------------|-------------------|-------------------|-------------------|
+| **조준범**        | **윤명상**        | **이소연**        | **유현수**        |
+| PM, Data Modeling, Back-end | DB 설계 및 구축, Back-end, Data Modeling | Front-end, Back-end | Front-end |
 
-(사진) / (사진) / (사진) / (사진)
-조준범 / 윤명상 / 이소연 / 유현수
+
 
 ## 관련 자료
 - [기획 문서 및 발표 자료](https://drive.google.com/drive/folders/1q44AQBK_FeTlDoVbJE38ONfbDm9C4KkT)
