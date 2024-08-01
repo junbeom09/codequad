@@ -52,7 +52,11 @@
 | ![조준범](사진_URL) | ![윤명상](사진_URL) | ![이소연](사진_URL) | ![유현수](사진_URL) |
 |-------------------|-------------------|-------------------|-------------------|
 | **조준범**        | **윤명상**        | **이소연**        | **유현수**        |
-| PM, Data Modeling, Back-end | DB 설계 및 구축, Back-end, Data Modeling | Front-end, Back-end | Front-end |
+| PM, Data Modeling
+Back-end | DB 설계 및 구축
+Back-end
+Data Modeling | Front-end
+Back-end | Front-end |
 | [GitHub](https://github.com/junbeom09) | [GitHub](https://github.com/Med1tation) | [GitHub](https://github.com/ssoy1) | [GitHub](https://github.com/EasyPeasy0) |
 
 
