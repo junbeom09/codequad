@@ -34,13 +34,13 @@
 | 협업도구    | ![GitHub](https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white)                                     |
 
 ## 💻 시스템 아키텍처(구조)
-### SW유스케이스
+### 💬 SW유스케이스
 ![image](https://github.com/user-attachments/assets/119fa6c1-eb50-4acb-b3e7-7980dba731f9)
 
-### 자동화 다이어그램
+### ⏱ 자동화 다이어그램
 ![456](https://github.com/user-attachments/assets/83e62cd1-4a93-41e0-b684-a30408bc6792)
 
-### 서비스 흐름도
+### 📊 서비스 흐름도
 ![tqtq](https://github.com/user-attachments/assets/542ca535-0d76-4464-a1a7-434daf7d3516)
 
    
